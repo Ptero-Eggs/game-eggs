@@ -21,6 +21,8 @@ Below is a categorized list of games with links to their respective server confi
 * [Arma 3](./arma/arma3)
 * [Arma Reforger](./arma/arma_reforger)
 
+#### [Aska](./Aska)
+
 #### Assetto Corsa
 
 #### [Astroneer](./astroneer)
