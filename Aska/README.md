@@ -4,11 +4,14 @@ Lay claim to unspoiled lands and pave the way for a fierce Viking tribe. Craft t
 
 ## Server Ports
 
-Aska makes use of a relay service an does not require any ports 
+Aska makes use of a relay service provided by the Photon Fusion middleware. Therefore it doesn't request any ports.
+
+At the time of writing, there were two ports configurable in the server's config file.
+- A "steam game port" that the server ignores and doesn't listen on at all.
+- A "steam query port" that listens but doesn't appear to respond to any type of traffic.
 
 ### Notes
 
-<!--Notes about the server ports.-->
-A GSLT is required for the server to authenticate with the network.
-The token needed for an authentication should come from https://steamcommunity.com/dev/managegameservers
-For the Aska game app (id: 1898300)
+A GSLT (Game Server Login Token) is required for the server to authenticate with the network.
+The token needed for authentication is requested here https://steamcommunity.com/dev/managegameservers
+For the Aska game (App ID: 1898300)
