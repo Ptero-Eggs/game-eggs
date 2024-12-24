@@ -4,17 +4,18 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-05-17T23:20:29+01:00",
+    "exported_at": "2024-12-24T13:33:48+00:00",
     "name": "Glowstone",
     "author": "support@pterodactyl.io",
     "description": "Glowstone is an open-source server implementation for Minecraft: Java Edition 1.12.2 and up.",
     "features": null,
     "docker_images": {
-        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8",
-        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
-        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
-        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
-        "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18"
+        "Java 8": "ghcr.io\/ptero-eggs\/yolks:java_8",
+        "Java 11": "ghcr.io\/ptero-eggs\/yolks:java_11",
+        "Java 16": "ghcr.io\/ptero-eggs\/yolks:java_16",
+        "Java 17": "ghcr.io\/ptero-eggs\/yolks:java_17",
+        "java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
+        "java 22": "ghcr.io\/ptero-eggs\/yolks:java_22"
     },
     "file_denylist": [],
     "startup": "java -Xms768M -Xmx{{SERVER_MEMORY}}M -XX:+UseG1GC -jar {{SERVER_JARFILE}}",
@@ -39,7 +40,8 @@
             "default_value": "glowstone.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/"
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "field_type": "text"
         },
         {
             "name": "Glowstone Version",
@@ -48,7 +50,8 @@
             "default_value": "latest",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|max:20"
+            "rules": "required|string|max:20",
+            "field_type": "text"
         },
         {
             "name": "GitHub User",
@@ -57,7 +60,8 @@
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "string|nullable"
+            "rules": "string|nullable",
+            "field_type": "text"
         },
         {
             "name": "GitHub OAuth Token",
@@ -66,7 +70,8 @@
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "string|nullable"
+            "rules": "string|nullable",
+            "field_type": "text"
         },
         {
             "name": "GitHub Package",
@@ -75,7 +80,8 @@
             "default_value": "GlowstoneMC\/Glowstone",
             "user_viewable": true,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         },
         {
             "name": "Match",
@@ -84,7 +90,8 @@
             "default_value": "glowstone.jar",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string"
+            "rules": "required|string",
+            "field_type": "text"
         }
     ]
 }
