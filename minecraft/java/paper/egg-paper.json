@@ -1,10 +1,10 @@
 {
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
-        "update_url": null,
-        "version": "PTDL_v2"
+        "version": "PTDL_v2",
+        "update_url": null
     },
-    "exported_at": "2024-08-02T12:05:42+00:00",
+    "exported_at": "2024-12-24T13:32:20+00:00",
     "name": "Paper",
     "author": "parker@pterodactyl.io",
     "description": "High performance Spigot fork that aims to fix gameplay and mechanics inconsistencies.",
@@ -18,14 +18,15 @@
         "Java 11": "ghcr.io\/ptero-eggs\/yolks:java_11",
         "Java 16": "ghcr.io\/ptero-eggs\/yolks:java_16",
         "Java 17": "ghcr.io\/ptero-eggs\/yolks:java_17",
-        "Java 21": "ghcr.io\/ptero-eggs\/yolks:java_21"
+        "java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
+        "java 22": "ghcr.io\/ptero-eggs\/yolks:java_22"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
     "config": {
         "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
-        "logs": "{}",
         "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
+        "logs": "{}",
         "stop": "stop"
     },
     "scripts": {
@@ -53,7 +54,7 @@
             "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:/^([\\w\\d._-]+)(\\.jar)$/",
+            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
             "field_type": "text"
         },
         {
