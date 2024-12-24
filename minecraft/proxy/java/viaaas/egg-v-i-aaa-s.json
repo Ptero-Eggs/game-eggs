@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-02T11:26:33+02:00",
+    "exported_at": "2024-12-24T14:07:29+00:00",
     "name": "VIAaaS",
     "author": "regulad@outlook.com",
     "description": "VIAaaS - ViaVersion as a Service - Standalone ViaVersion proxy",
@@ -14,6 +14,7 @@
         "pid_limit"
     ],
     "docker_images": {
+        "Java 22": "ghcr.io\/ptero-eggs\/yolks:java_22",
         "Java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
         "Java 17": "ghcr.io\/ptero-eggs\/yolks:java_17",
         "Java 16": "ghcr.io\/ptero-eggs\/yolks:java_16",
