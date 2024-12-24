@@ -4,17 +4,18 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-11-25T16:40:11+01:00",
+    "exported_at": "2024-12-24T13:31:35+00:00",
     "name": "Quilt",
     "author": "diedyesterdaywashere@gmail.com",
     "description": "The Quilt project is an open-source, community-driven modding toolchain designed primarily for Minecraft. By focusing on speed, ease of use and modularity, Quilt aims to provide a sleek and modern modding toolchain with an open ecosystem.",
     "features": null,
     "docker_images": {
-        "Java 17": "ghcr.io\/pterodactyl\/yolks:java_17",
-        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8",
-        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
-        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
-        "Java 18": "ghcr.io\/pterodactyl\/yolks:java_18"
+        "Java 8": "ghcr.io\/ptero-eggs\/yolks:java_8",
+        "Java 11": "ghcr.io\/ptero-eggs\/yolks:java_11",
+        "Java 16": "ghcr.io\/ptero-eggs\/yolks:java_16",
+        "Java 17": "ghcr.io\/ptero-eggs\/yolks:java_17",
+        "java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
+        "java 22": "ghcr.io\/ptero-eggs\/yolks:java_22"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}} nogui",
