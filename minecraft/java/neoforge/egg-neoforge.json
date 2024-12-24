@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-11-13T15:30:48+01:00",
+    "exported_at": "2024-12-24T13:33:40+00:00",
     "name": "NeoForge",
     "author": "glorantv@icloud.com",
     "description": "NeoForge Server. NeoForge is a modding API (Application Programming Interface), which makes it easier to create mods, and also make sure mods are compatible with each other. NeoForge is a fork of Minecraft Forge.",
@@ -14,11 +14,12 @@
         "pid_limit"
     ],
     "docker_images": {
+        "Java 8": "ghcr.io\/ptero-eggs\/yolks:java_8",
         "Java 11": "ghcr.io\/ptero-eggs\/yolks:java_11",
         "Java 16": "ghcr.io\/ptero-eggs\/yolks:java_16",
         "Java 17": "ghcr.io\/ptero-eggs\/yolks:java_17",
-        "Java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
-        "Java 8": "ghcr.io\/ptero-eggs\/yolks:java_8"
+        "java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
+        "java 22": "ghcr.io\/ptero-eggs\/yolks:java_22"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true @unix_args.txt",
