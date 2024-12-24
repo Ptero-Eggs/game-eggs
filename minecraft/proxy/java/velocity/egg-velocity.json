@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-02-13T17:26:13+0000",
+    "exported_at": "2024-12-24T14:08:00+00:00",
     "name": "Velocity",
     "author": "parker@parkervcp.com",
     "description": "Velocity is a Minecraft server proxy with unparalleled server support, scalability, and flexibility.",
@@ -14,6 +14,7 @@
         "pid_limit"
     ],
     "docker_images": {
+        "Java 22": "ghcr.io\/ptero-eggs\/yolks:java_22",
         "Java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
         "Java 17": "ghcr.io\/ptero-eggs\/yolks:java_17",
         "Java 16": "ghcr.io\/ptero-eggs\/yolks:java_16",
