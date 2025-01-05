@@ -156,6 +156,7 @@ Below is a categorized list of games with links to their respective server confi
 #### Minecraft
 * [Bedrock Edition](./minecraft/bedrock)
   * [GoMint](./minecraft/bedrock/gomint)
+  * [LeviLamina](./minecraft/bedrock/LeviLamina)
   * [LiteLoader](./minecraft/bedrock/LiteLoader-bedrock)
   * [Nukkit](./minecraft/bedrock/nukkit)
   * [PocketMine-MP](./minecraft/bedrock/pocketmine_mp)
