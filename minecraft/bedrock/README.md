@@ -11,10 +11,6 @@ The official Minecraft Bedrock (Formerly Minecraft Pocket Edition) server.
 No longer actively maintained.
 GoMint is a modern Minecraft Bedrock Edition server enabling you to make your visions come true
 
-
-LeviLamina
-
-
 ## [LeviLamina](/minecraft/bedrock/LeviLamina/)
 
 [LeviLamina](https://github.com/LiteLDev/LeviLamina)
