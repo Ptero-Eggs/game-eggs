@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-01-05T08:41:35+00:00",
+    "exported_at": "2025-01-05T10:24:57+00:00",
     "name": "LeviLamina",
     "author": "eggs@purpleflaghosting.com",
     "description": "LeviLamina is an unofficial mod loader designed to offer indispensable API support for Minecraft Bedrock Edition. It boasts a comprehensive API, an array of utility interfaces, a robust event system, and comprehensive support for basic interfaces. LeviLamina provides an expansive API, a powerful event system, and a wealth of encapsulated development infrastructure interfaces, forming a solid foundation for augmenting the Minecraft Bedrock Edition with additional gameplay features and functionalities. By leveraging mods, the process of extending Bedrock functionality becomes effortless, with a user-friendly development process and an adaptable approach.",
@@ -15,7 +15,7 @@
     "file_denylist": [],
     "startup": "wine lip.exe install --yes --specifiers lip-install.txt ; wine bedrock_server_mod.exe",
     "config": {
-        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"server-name\": \"{{server.build.env.SERVERNAME}}\",\r\n            \"gamemode\": \"{{server.build.env.GAMEMODE}}\",\r\n            \"difficulty\": \"{{server.build.env.DIFFICULTY}}\",\r\n            \"max-players\": \"{{server.build.env.MAXPLAYERS}}\",\r\n            \"level-name\": \"{{server.build.env.WORLDNAME}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"server-portv6\": \"{{server.build.default.port}}\",\r\n            \"server-name\": \"{{server.build.env.SERVERNAME}}\",\r\n            \"gamemode\": \"{{server.build.env.GAMEMODE}}\",\r\n            \"difficulty\": \"{{server.build.env.DIFFICULTY}}\",\r\n            \"max-players\": \"{{server.build.env.MAXPLAYERS}}\",\r\n            \"level-name\": \"{{server.build.env.WORLDNAME}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"IPv4 supported\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -96,6 +96,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Winetricks",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "vcrun2022",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
             "field_type": "text"
         }
     ]
