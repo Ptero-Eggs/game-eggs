@@ -8,6 +8,9 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [Abiotic Factor](./abiotic_factor)
 
+#### Americas Army
+* [Proving Grounds](./americas_army/proving_grounds)
+
 #### Among Us
 * [BetterCrewLink Server](./among_us/bettercrewlink_server)
 * [Crewlink Server](./among_us/crewlink_server)
