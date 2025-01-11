@@ -9,7 +9,7 @@ You can also optionally specify a file ID. If you do not specify a file ID, the 
 The file ID for the server pack for [All the Mods 8 - ATM8](https://www.curseforge.com/minecraft/modpacks/all-the-mods-8) version `1.0.17` is `4504876` for example. 
 This can be found on the modpack page by clicking the wanted file and copying the id at the end of the URL (the number after `/files/`).
 
-The script will automatically setup of Forge, Fabric, or Quilt depending on the modpack.
+The script will automatically setup of Forge, NeoForge, Fabric, or Quilt depending on the modpack.
 
 You *must* specify a CurseForge API key. 
 You can find out how to get an API key [here](https://support.curseforge.com/en/support/solutions/articles/9000208346-about-the-curseforge-api-and-how-to-apply-for-a-key)
