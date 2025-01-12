@@ -67,6 +67,6 @@
             "user_editable": false,
             "rules": "required|integer|in:203300",
             "field_type": "text"
-        },
+        }
     ]
 }
