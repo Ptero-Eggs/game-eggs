@@ -5,9 +5,9 @@
         "update_url": null
     },
     "exported_at": "2024-12-24T13:33:18+00:00",
-    "name": "FTB-modpacks.ch Server",
+    "name": "FTB Server",
     "author": "runemaster580@gmail.com",
-    "description": "Since the release of the FTB APP, FTB modpacks are now distributed through modpacks.ch. This egg was developed for support for modpacks that are distributed through this.",
+    "description": "FTB modpacks are now distributed through their own API. This egg was developed for support for modpacks that are distributed through this.",
     "features": [
         "eula",
         "java_version",
