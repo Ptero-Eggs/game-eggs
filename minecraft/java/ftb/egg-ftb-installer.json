@@ -69,7 +69,7 @@
         },
         {
             "name": "FTB Pack Version ID",
-            "description": "The modpack api version ID.\r\nLeave this and FTP Pack Version empty to install latest.\r\n\r\nExample FTB Revelations version id for version \"2.0.2\" is 86.\r\nwhich would come out as: https:\/\/api.feed-the-beast.com\/v1\/modpacks\/public\/modpack\/5\/86",
+            "description": "The modpack api version ID.\r\nLeave this and FTB Pack Version empty to install latest.\r\n\r\nExample FTB Revelations version id for version \"2.0.2\" is 86.\r\nwhich would come out as: https:\/\/api.feed-the-beast.com\/v1\/modpacks\/public\/modpack\/5\/86",
             "env_variable": "FTB_MODPACK_VERSION_ID",
             "default_value": "",
             "user_viewable": true,
