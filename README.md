@@ -90,6 +90,8 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [Escape from Tarkov (EFT)](./eft)
 
+#### [Empyrion](./empyrion)
+
 #### [Enshrouded](./enshrouded)
 
 #### [Factorio](./factorio)
