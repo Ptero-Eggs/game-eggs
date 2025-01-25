@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-01-13T21:17:09+01:00",
+    "exported_at": "2025-01-25T21:25:38+00:00",
     "name": "ClassiCube(MGC)",
     "author": "panel@qoutsy.33mail.com",
     "description": "Debian based MCGalaxy Egg.",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\nMATCH=mcgalaxy_\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nif [ -z \"${GITHUB_USER}\" ] && [ -z \"${GITHUB_OAUTH_TOKEN}\" ] ; then\r\n    echo -e \"using anon api call\"\r\nelse\r\n    echo -e \"user and oauth token set\"\r\n    alias curl='curl -u ${GITHUB_USER}:${GITHUB_OAUTH_TOKEN} '\r\nfi\r\n\r\n## get release info and download links\r\nLATEST_JSON=$(curl --silent \"https:\/\/api.github.com\/repos\/UnknownShadow200\/MCGalaxy\/releases\/latest\")\r\nRELEASES=$(curl --silent \"https:\/\/api.github.com\/repos\/UnknownShadow200\/MCGalaxy\/releases\")\r\n\r\nif [ -z \"${VERSION}\" ] || [ \"${VERSION}\" == \"latest\" ]; then\r\n    DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url | grep -i ${MATCH})\r\nelse\r\n    VERSION_CHECK=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .tag_name')\r\n    if [ \"${VERSION}\" == \"${VERSION_CHECK}\" ]; then\r\n        DOWNLOAD_URL=$(echo ${RELEASES} | jq -r --arg VERSION \"${VERSION}\" '.[] | select(.tag_name==$VERSION) | .assets[].browser_download_url' | grep -i ${MATCH})\r\n    else\r\n        echo -e \"defaulting to latest release\"\r\n        DOWNLOAD_URL=$(echo ${LATEST_JSON} | jq .assets | jq -r .[].browser_download_url)\r\n    fi\r\nfi\r\n\r\n\r\necho -e \"Downloading ClassiCube version ${VERSION}\"\r\necho -e \"Download URL is ${DOWNLOAD_URL}\"\r\n\r\ncurl -ssL -o mcgalaxy.zip ${DOWNLOAD_URL}\r\n\r\nunzip -j mcgalaxy.zip\r\nrm mcgalaxy.zip\r\nchmod +X *.dll *.exe\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "#!\/bin\/bash\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nDOWNLOAD_URL=\"https:\/\/cdn.classicube.net\/client\/mcg\/release\/MCGalaxy.zip\"\r\n\r\necho -e \"Downloading MCGalaxy from ${DOWNLOAD_URL}...\"\r\ncurl -ssL -o mcgalaxy.zip \"${DOWNLOAD_URL}\"\r\n\r\nif [ $? -ne 0 ]; then\r\n    echo \"Failed to download the file. Exiting.\"\r\n    exit 1\r\nfi\r\n\r\necho \"Extracting MCGalaxy...\"\r\nunzip -j mcgalaxy.zip\r\nrm mcgalaxy.zip\r\nchmod +x *.dll *.exe\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/ptero-eggs\/installers:debian",
             "entrypoint": "bash"
         }
