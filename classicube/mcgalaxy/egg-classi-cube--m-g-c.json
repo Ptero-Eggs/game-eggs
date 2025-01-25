@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-01-25T21:25:38+00:00",
+    "exported_at": "2025-01-25T22:40:58+00:00",
     "name": "ClassiCube(MGC)",
     "author": "panel@qoutsy.33mail.com",
     "description": "Debian based MCGalaxy Egg.",
@@ -28,16 +28,6 @@
         }
     },
     "variables": [
-        {
-            "name": "Install Version",
-            "description": "Specify the version to install from https:\/\/github.com\/UnknownShadow200\/MCGalaxy\/releases. Leave latest to install the latest version.",
-            "env_variable": "VERSION",
-            "default_value": "latest",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|string|max:20",
-            "field_type": "text"
-        },
         {
             "name": "Server Name",
             "description": "Specify the server name",
