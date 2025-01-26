@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-06-20T12:12:15+02:00",
+    "exported_at": "2025-01-26T13:47:52+00:00",
     "name": "CS2D",
     "author": "josdekurk@gmail.com",
     "description": "Plant and defuse bombs, rescue hostages or accomplish new missions like capture the flag or domination! Use a huge arsenal of weapons and equipment including crazy stuff like portal guns, lasers, RPGs, turrets and much more! You can even build things!",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nv=$(curl -s https:\/\/www.cs2d.com\/download.php |  grep -Eo \"https?:\/\/\\S+?\\\"\" | grep -i \"get.php?get=cs2d_\" | grep -i \"linux\") # https:\/\/www.unrealsoftware.de\/get.php?get=cs2d_1013_linux.zip\"\r\nn=$(echo ${v#*=} | sed 's\/\"\/\/' ) # cs2d_1013_linux.zip\r\n\r\nc=$(curl -s https:\/\/www.unrealsoftware.de\/get.php?get=${n}  |  grep -o '<a class=\"l_dl\" href=\"get.php?.*\">' | cut -f2 -d \"<\"  | awk '{print $3}' | grep -o '\"[^\"]*\"')  # \"get.php?get=cs2d_1013_linux.zip&amp;p=1&amp;cid=15745\"\r\ncid=$(echo ${c\/\/\\\"\/} | cut -f4 -d '=') #15745\r\n\r\nDOWNLOAD_URL=\"https:\/\/www.unrealsoftware.de\/get.php?get=${n}&p=1&cid=${cid}\"\r\n\r\necho \"${DOWNLOAD_URL}\"\r\n\r\ncurl -sSL -o client.zip \"${DOWNLOAD_URL}\"\r\n\r\nunzip -o client.zip\r\nrm client.zip\r\n\r\ncurl -sSL -o dedicated.zip \"https:\/\/www.unrealsoftware.de\/files_pub\/cs2d_dedicated_linux.zip\"\r\nunzip -o dedicated.zip\r\nrm dedicated.zip\r\n\r\nchmod +x cs2d_dedicated\r\n\r\necho \"install finished\"",
+            "script": "#!\/bin\/bash\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nDEDICATED_URL=\"https:\/\/www.unrealsoftware.de\/files_pub\/cs2d_dedicated_linux.zip\"\r\nCLIENT_URL=\"https:\/\/github.com\/GGLVXD\/FuckCS2D\/raw\/refs\/heads\/main\/cs2d_1014_linux.zip\"\r\n\r\necho \"Downloading CS2D dedicated server...\"\r\ncurl -L -o cs2d_dedicated_linux.zip \"${DEDICATED_URL}\" || { echo \"Failed to download dedicated server.\"; exit 1; }\r\n\r\necho \"Downloading CS2D client...\"\r\ncurl -L -o cs2d_1014_linux.zip \"${CLIENT_URL}\" || { echo \"Failed to download CS2D client.\"; exit 1; }\r\n\r\nunzipy() {\r\n    local file=$1\r\n    echo \"Unzipping ${file}...\"\r\n\r\n    unzip -o \"${file}\" || { echo \"Failed to unzip ${file}.\"; exit 1; }\r\n}\r\nunzip \"cs2d_dedicated_linux.zip\"\r\nunzip \"cs2d_1014_linux.zip\"\r\n\r\nchmod +x .\/cs2d_dedicated\r\n\r\necho \"deleting zip files...\"\r\nrm -f cs2d_dedicated_linux.zip cs2d_1014_linux.zip\r\n\r\necho \"Installation completed successfully.\"",
             "container": "ghcr.io\/ptero-eggs\/installers:debian",
             "entrypoint": "bash"
         }
@@ -54,7 +54,7 @@
             "env_variable": "SERVER_PLAYERS",
             "default_value": "12",
             "user_viewable": true,
-            "user_editable": false,
+            "user_editable": true,
             "rules": "required|string",
             "field_type": "text"
         }
