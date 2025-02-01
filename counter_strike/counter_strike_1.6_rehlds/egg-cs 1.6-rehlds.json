@@ -1,0 +1,144 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-02-01T12:19:51+01:00",
+    "name": "CS 1.6 - ReHLDS",
+    "author": "ptero@redbananaofficial.com",
+    "description": "CS 1.6 ReHLDS binaries egg.\r\n\r\nReHLDS is a reverse-engineered, optimized version of HLDS.\r\nDeveloped by third-party modders to improve stability, performance, and security.\r\nFully compatible with MetaMod, AMX Mod X, and other plugins.\r\n\r\nIncluded modules:\r\n* rehlds\r\n* amxmodx\r\n* metamod-r\r\n* reapi\r\n* ReGameDLL_CS\r\n* reunion\r\n* revoice-plus",
+    "features": [
+        "steam_disk_space"
+    ],
+    "docker_images": {
+        "ghcr.io\/ptero-eggs\/games:source": "ghcr.io\/ptero-eggs\/games:source"
+    },
+    "file_denylist": [],
+    "startup": ".\/hlds_run -console -game {{HLDS_GAME}} -port {{SERVER_PORT}} -sport {{VAC_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart +maxplayers 32 +pingboost 2 +sys_ticrate 1200",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\"\r\n}",
+        "logs": "{}",
+        "stop": "quit"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Server Files: \/mnt\/server\r\n\r\n# Ensure Steam credentials are set\r\nif [[ -z \"${STEAM_USER}\" ]] || [[ -z \"${STEAM_PASS}\" ]]; then\r\n    echo -e \"Steam user is not set.\"\r\n    echo -e \"Using anonymous login.\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"User set to ${STEAM_USER}\"\r\nfi\r\n\r\n# Install SteamCMD\r\necho \"Downloading and installing SteamCMD...\"\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# Set ownership\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n# Run SteamCMD to install the game\r\necho \"Installing the game via SteamCMD...\"\r\nSTEAMCMD_ARGS=(\r\n    \"+force_install_dir \/mnt\/server\"\r\n    \"+login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH}\"\r\n    \"+app_set_config 90 mod ${HLDS_GAME}\"\r\n    \"+app_update ${SRCDS_APPID} ${INSTALL_FLAGS} validate\"\r\n    \"+quit\"\r\n)\r\n\r\n[[ -n \"${SRCDS_BETAID}\" ]] && STEAMCMD_ARGS+=(\"-beta ${SRCDS_BETAID}\")\r\n[[ -n \"${SRCDS_BETAPASS}\" ]] && STEAMCMD_ARGS+=(\"-betapassword ${SRCDS_BETAPASS}\")\r\n\r\n.\/steamcmd.sh \"${STEAMCMD_ARGS[@]}\"\r\n\r\n# Set up Steam libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\ncd \/mnt\/server\r\n\r\n# Download and install default server files from gh\r\necho \"Downloading the latest server files...\"\r\nREPO_OWNER=\"oldstyle-community\"\r\nREPO_NAME=\"cstrike_default\"\r\nRELEASE_DATA=$(curl -s https:\/\/api.github.com\/repos\/$REPO_OWNER\/$REPO_NAME\/releases\/latest)\r\n\r\nTAG_NAME=$(echo \"$RELEASE_DATA\" | jq -r '.tag_name')\r\n[[ \"$TAG_NAME\" == \"null\" ]] && TAG_NAME=\"1.0.0\"  # Fallback in case of gh api failure\r\n\r\nDOWNLOAD_URL=$(echo \"$RELEASE_DATA\" | jq -r '.zipball_url')\r\nOUTPUT_FILE=\"$REPO_NAME-$TAG_NAME.zip\"\r\n\r\n# Clean unused files\r\nrm -rf ${REPO_OWNER}-*\r\n\r\necho \"Downloading $OUTPUT_FILE...\"\r\ncurl -L -o $OUTPUT_FILE $DOWNLOAD_URL\r\n\r\nif [ $? -eq 0 ]; then\r\n    echo \"Download successful!\"\r\nelse\r\n    echo \"Download failed!\"\r\n    exit 1\r\nfi\r\n\r\n# extract files\r\nunzip -q -o \"$OUTPUT_FILE\"\r\nrm -rf \"$OUTPUT_FILE\"\r\ncd ${REPO_OWNER}-*\r\n\r\n# update SteamIdHashSalt function\r\nupdate_steamid_salt() {\r\n    local CONFIG_FILE=\"\/mnt\/server\/cstrike\/reunion.cfg\"\r\n    \r\n    if [[ -f \"$CONFIG_FILE\" ]]; then\r\n        local NEW_SALT=$(tr -dc 'A-Za-z0-9' < \/dev\/urandom | head -c 50)\r\n        if grep -q \"^SteamIdHashSalt\" \"$CONFIG_FILE\"; then\r\n            sed -i \"s\/^SteamIdHashSalt.*\/SteamIdHashSalt = $NEW_SALT\/\" \"$CONFIG_FILE\"\r\n        else\r\n            echo \"SteamIdHashSalt = $NEW_SALT\" >> \"$CONFIG_FILE\"\r\n        fi\r\n        echo \"Updated SteamIdHashSalt in $CONFIG_FILE.\"\r\n    else\r\n        echo \"Warning: $CONFIG_FILE not found. Skipping SteamIdHashSalt update.\"\r\n    fi\r\n}\r\n\r\n# Module Installation\r\ninstall_module() {\r\n    local MODULE_NAME=$1\r\n    local MODULE_DIR=$2\r\n    local MODULE_ZIP=\"\"\r\n\r\n    MODULE_ZIP=$(find modules\/$MODULE_DIR\/ -type f -name '*.zip' | sort -V | tail -n 1)\r\n    \r\n    if [[ -z \"$MODULE_ZIP\" ]]; then\r\n        echo \"Error: No ZIP file found for $MODULE_NAME!\"\r\n        return 1\r\n    fi\r\n\r\n    echo \"Installing $MODULE_NAME from $MODULE_ZIP...\"\r\n    \r\n    local INSTALL_DIR=\"${MODULE_NAME}-install\"\r\n    mkdir -p \"$INSTALL_DIR\"\r\n    cp -r \"$MODULE_ZIP\" \"$INSTALL_DIR\"\r\n\r\n    cd \"$INSTALL_DIR\" || return 1\r\n    unzip -q -o *.zip &\r\n    wait\r\n\r\n    case \"$MODULE_NAME\" in\r\n        \"rehlds\") \r\n            cp -r bin\/linux32\/* ..\/server \r\n            ;;\r\n        \r\n        \"amxmodx\" | \"reapi\") \r\n            cp -r addons ..\/server\/cstrike \r\n            ;;\r\n        \r\n        \"ReGameDLL_CS\") \r\n            cp -r bin\/linux32\/* ..\/server \r\n            ;;\r\n        \r\n        \"metamod-r\")\r\n            cp -r addons ..\/server\/cstrike\r\n            touch ..\/server\/cstrike\/addons\/metamod\/plugins.ini\r\n            grep -qxF \"linux addons\/amxmodx\/dlls\/amxmodx_mm_i386.so\" ..\/server\/cstrike\/addons\/metamod\/plugins.ini || echo \"linux addons\/amxmodx\/dlls\/amxmodx_mm_i386.so\" >> ..\/server\/cstrike\/addons\/metamod\/plugins.ini\r\n            sed -i 's|^gamedll_linux.*|gamedll_linux \"addons\/metamod\/metamod_i386.so\"|' ..\/server\/cstrike\/liblist.gam || echo 'gamedll_linux \"addons\/metamod\/metamod_i386.so\"' >> ..\/server\/cstrike\/liblist.gam\r\n            ;;\r\n        \r\n        \"reunion\")\r\n            mkdir -p ..\/server\/cstrike\/addons\/metamod\/reunion\/\r\n            cp -r bin\/Linux\/* ..\/server\/cstrike\/addons\/metamod\/reunion\/\r\n            grep -qxF \"linux addons\/metamod\/reunion\/reunion_mm_i386.so\" ..\/server\/cstrike\/addons\/metamod\/plugins.ini || echo \"linux addons\/metamod\/reunion\/reunion_mm_i386.so\" >> ..\/server\/cstrike\/addons\/metamod\/plugins.ini\r\n            \r\n            # Ensure \/mnt\/server\/cstrike is a directory\r\n            if [[ ! -d \"\/mnt\/server\/cstrike\" ]]; then\r\n                echo \"Warning: \/mnt\/server\/cstrike was not a directory. Fixing...\"\r\n                rm -f \/mnt\/server\/cstrike  # Remove it if it's a file\r\n                mkdir -p \/mnt\/server\/cstrike  # Recreate as a directory\r\n            fi\r\n\r\n            # Ensure reunion.cfg is copied correctly\r\n            if [[ -f \"reunion.cfg\" ]]; then\r\n                cp -v reunion.cfg \/mnt\/server\/cstrike\/reunion.cfg\r\n                echo \"Successfully copied reunion.cfg to \/mnt\/server\/cstrike\/\"\r\n\r\n                # Update SteamIdHashSalt\r\n                update_steamid_salt\r\n            else\r\n                echo \"Error: reunion.cfg not found! SteamIdHashSalt update skipped.\"\r\n            fi\r\n            ;;\r\n    esac\r\n\r\n    cd ..\r\n    rm -rf \"$INSTALL_DIR\"\r\n\r\n    echo \"$MODULE_NAME successfully installed!\"\r\n}\r\n\r\n# List of modules to be installed\r\ndeclare -A MODULES\r\nMODULES[\"rehlds\"]=\"rehlds\"\r\nMODULES[\"amxmodx\"]=\"amxmodx\"\r\nMODULES[\"ReGameDLL_CS\"]=\"ReGameDLL_CS\"\r\nMODULES[\"reapi\"]=\"reapi\"\r\nMODULES[\"metamod-r\"]=\"metamod-r\"\r\nMODULES[\"reunion\"]=\"reunion\"\r\n\r\n# Installing all modules\r\nfor MODULE in \"${!MODULES[@]}\"; do\r\n    install_module \"$MODULE\" \"${MODULES[$MODULE]}\"\r\ndone\r\n\r\n# Move server files\r\ncd \/mnt\/server\/${REPO_OWNER}-*\r\ncp -r server\/* \/mnt\/server\r\nchmod -R 777 \/mnt\/server\r\nrm -rf ${REPO_OWNER}-*\r\n\r\n# Ensure cstrike directory exists and is a directory\r\nif [[ ! -d \"\/mnt\/server\/cstrike\" ]]; then\r\n    echo \"Warning: \/mnt\/server\/cstrike was not a directory. Fixing...\"\r\n    rm -f \/mnt\/server\/cstrike  # Remove it if it's a file\r\n    mkdir -p \/mnt\/server\/cstrike  # Recreate as a directory\r\nfi\r\n\r\n# Ensure listip.cfg exists\r\nif [[ ! -f \"\/mnt\/server\/cstrike\/listip.cfg\" ]]; then\r\n    echo \"\/\/ This file stores banned IPs\" > \/mnt\/server\/cstrike\/listip.cfg\r\n    echo \"Created listip.cfg...\"\r\nelse\r\n    echo \"listip.cfg already exists.\"\r\nfi\r\n\r\n# Ensure banned.cfg exists\r\nif [[ ! -f \"\/mnt\/server\/cstrike\/banned.cfg\" ]]; then\r\n    echo \"\/\/ This file stores banned Steam IDs and IPs\" > \/mnt\/server\/cstrike\/banned.cfg\r\n    echo \"Created banned.cfg...\"\r\nelse\r\n    echo \"banned.cfg already exists.\"\r\nfi\r\n\r\n# Ensure csstats.dat exists to avoid CSX warnings\r\nCSSTATS_PATH=\"\/mnt\/server\/cstrike\/addons\/amxmodx\/data\/csstats.dat\"\r\n\r\n# Ensure the data directory exists\r\nmkdir -p \/mnt\/server\/cstrike\/addons\/amxmodx\/data\r\n\r\n# To avoid errors relating to the csstats.dat file\r\nif [[ ! -f \"$CSSTATS_PATH\" ]]; then\r\n    touch \"$CSSTATS_PATH\"\r\n    echo \"Created csstats.dat to prevent CSX errors.\"\r\nelse\r\n    echo \"csstats.dat already exists.\"\r\nfi\r\n\r\n# Ensure correct file permissions\r\nchmod 644 \/mnt\/server\/cstrike\/listip.cfg \/mnt\/server\/cstrike\/banned.cfg \/mnt\/server\/cstrike\/addons\/amxmodx\/data\/csstats.dat\r\n\r\n# Cleanup unused installation files\r\ncd \/mnt\/server\r\nrm -rf ${REPO_OWNER}-*  # Remove the leftover source directory\r\nrm -f \/mnt\/server\/.gitattributes\r\nrm -f \/mnt\/server\/.gitignore\r\nrm -f \/mnt\/server\/LICENSE\r\nrm -f \/mnt\/server\/README.md\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation Complete!\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/ptero-eggs\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Game ID",
+            "description": "The ID corresponding to the game to download and run using HLDS.\r\n\r\nThe HLDS server ID is 90. This should not be changed.",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "90",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|in:90",
+            "field_type": "text"
+        },
+        {
+            "name": "Game Name",
+            "description": "The name corresponding to the game to download and run using HLDS",
+            "env_variable": "HLDS_GAME",
+            "default_value": "cstrike",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|alpha_dash|between:1,100",
+            "field_type": "text"
+        },
+        {
+            "name": "Map",
+            "description": "The default map for the server.",
+            "env_variable": "SRCDS_MAP",
+            "default_value": "de_dust2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|alpha_dash",
+            "field_type": "text"
+        },
+        {
+            "name": "VAC port",
+            "description": "Specifies the VAC port the server should use. Default is 26900.",
+            "env_variable": "VAC_PORT",
+            "default_value": "26900",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|numeric|digits_between:1,5",
+            "field_type": "text"
+        },
+        {
+            "name": "ReHLDS Version",
+            "description": "The version of ReHLDS to install, or 'latest' for the latest release.",
+            "env_variable": "VERSION",
+            "default_value": "latest",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Validate",
+            "description": "Validate game files on update. Keep it disabled with ReHLDS due to SteamCMD overwriting its changes",
+            "env_variable": "VALIDATE",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Username",
+            "description": "Username associated wanted to be used. Not needed.",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Steam Password for account.",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Auth",
+            "description": "Steam authenticator code for the account",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Beta branch",
+            "description": "Leave empty for the public branch, for the legacy version select steam_legacy.",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "steam_legacy",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "nullable|string|in:,steam_legacy",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto update",
+            "description": "Auto update on restart",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}
