@@ -62,7 +62,7 @@ Below is a categorized list of games with links to their respective server confi
 #### Counter-Strike
 * [Counter-Strike 2](./counter_strike/counter_strike_2)
 * [Counter-Strike: Source](./counter_strike/counter_strike_source)
-* [Counter-Strike: Source](./counter_strike/counter_strike_1.6_rehlds)
+* [Counter-Strike: cs1.6-rehlds](./counter_strike/counter_strike_1.6_rehlds)
 
 #### [Craftopia](./craftopia)
 
