@@ -7,11 +7,6 @@ This repository offers everything you need to set up a Counter-Strike 1.6 server
 
 
 
-## Installation Notes
-
-This repository is designed for use with Pterodactyl Panel, automating the installation process and ensuring an up-to-date setup. Follow the egg's setup instructions to deploy a fully functional server.
-
-
 
 ## System Requirements
 
