@@ -3,7 +3,7 @@
 ## Description
 Counter-Strike 1.6 ReHLDS (Reverse Engineered Half-Life Dedicated Server) is an optimized and updated version of the original HLDS, designed for stability, performance, and security. It provides a modern platform for hosting Counter-Strike 1.6 servers with improved support for custom plugins and modules.
 
-This repository offers everything you need to set up a Counter-Strike 1.6 server using ReHLDS, MetaMod-R, AMX Mod X, and other popular tools.
+This egg offers everything you need to set up a Counter-Strike 1.6 server using ReHLDS, MetaMod-R, AMX Mod X, and other popular tools.
 
 
 
