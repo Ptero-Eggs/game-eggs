@@ -4,8 +4,8 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-02-02T19:00:48+01:00",
-    "name": "CS 1.6 - ReHLDS - Dev",
+    "exported_at": "2025-02-02T19:09:29+01:00",
+    "name": "CS 1.6 - ReHLDS",
     "author": "ptero@redbananaofficial.com",
     "description": "CS 1.6 ReHLDS binaries egg.\r\n\r\nReHLDS is a reverse-engineered, optimized version of HLDS.\r\nDeveloped by third-party modders to improve stability, performance, and security.\r\nFully compatible with MetaMod, AMX Mod X, and other plugins.\r\n\r\nIncluded modules are rehlds, amxmodx, metamod-r, reapi, ReGameDLL_CS, reunion and revoice-plus",
     "features": [
