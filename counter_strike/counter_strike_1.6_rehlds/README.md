@@ -17,20 +17,20 @@ This egg offers everything you need to set up a Counter-Strike 1.6 server using 
 | Storage      | 2 GB                | 5 GB               |
 
 
-
 ## Server Ports
 
-The following ports are required to run a Counter-Strike 1.6 server:
+Ports required to run the server in a table format.
 
-| Port    | Default |
+| Port    | default |
 |---------|---------|
 | Game    | 27015   |
-| HLTV    | 27020   |
+| Source TV | 27020 |
+| Client  | 27005   |
+| Steam   | 26900   |
 
-Ensure these ports are open and properly forwarded if running the server behind a firewall or router.
 
-
-
+27015 is the default port, but any port can be used.
+The only required port is the Game port, server can run perfectly fine without other allocations.
 
 
 ## Modules
@@ -40,12 +40,11 @@ Ensure these ports are open and properly forwarded if running the server behind 
 - **AMX Mod X**: Advanced scripting platform for server plugins.
 - **ReAPI**: Enhances plugin capabilities with new native functions.
 - **ReGameDLL**: Updated game library for improved functionality.
-
+- **Reunion**: A Metamod plugin that allows protocol 47 and 48 non-steam clients to connect to ReHLDS servers
 
 
 ## Notes
 
 - The server installation includes default configuration files such as `server.cfg`, `listip.cfg`, and `banned.cfg`.
-- The `reunion.cfg` file is used for managing authentication settings.
 
 For further configuration or plugin information, refer to the official [AMX Mod X documentation](https://amxmodx.org/) or the [ReHLDS GitHub repository](https://github.com/dreamstalker/rehlds).
