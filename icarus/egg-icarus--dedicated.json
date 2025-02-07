@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-09-03T21:07:28+02:00",
+    "exported_at": "2025-02-07T21:18:12+08:00",
     "name": "Icarus-Dedicated",
     "author": "bolverblitz@ebg.pw",
     "description": "Icarus is a survival game that with dedicated servers as a public beta",
@@ -64,7 +64,7 @@
             "name": "WINETRICKS_RUN",
             "description": "Run installs on software that is required by the server",
             "env_variable": "WINETRICKS_RUN",
-            "default_value": "vcrun2019 corefonts",
+            "default_value": "vcrun2022 corefonts",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|in:vcrun2019 corefonts",
