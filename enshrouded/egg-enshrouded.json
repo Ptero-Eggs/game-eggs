@@ -4,9 +4,9 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-03-25T17:55:50+01:00",
+    "exported_at": "2025-02-18T21:16:55+01:00",
     "name": "Enshrouded",
-    "author": "vapokrocks@gmail.com",
+    "author": "ptero@redbananaofficial.com",
     "description": "Enshrouded is a game of survival, crafting, and Action RPG combat, set within a sprawling voxel-based continent. As you journey across the mountains and deserts of an open world, you are free to choose your path and shape your destiny.  Credit to gOOvER for the help with the proton image which seems to be performing better over the wine egg.",
     "features": [
         "steam_disk_space"
@@ -17,59 +17,19 @@
     "file_denylist": [],
     "startup": "rm .\/logs\/enshrouded_server.log; proton run .\/enshrouded_server.exe & ENS_PID=$! ; tail -c0 -F .\/logs\/enshrouded_server.log --pid=$ENS_PID",
     "config": {
-        "files": "{\r\n    \"enshrouded_server.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"name\": \"{{server.build.env.SRV_NAME}}\",\r\n            \"password\": \"{{server.build.env.SRV_PW}}\",\r\n            \"slotCount\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"gamePort\": \"{{server.build.default.port}}\",\r\n            \"queryPort\": \"{{server.build.env.QUERY_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"enshrouded_server.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"name\": \"{{server.build.env.SRV_NAME}}\",\r\n            \"queryPort\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"gamePort\": \"{{server.build.default.port}}\",\r\n            \"slotCount\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"userGroups[0].password\": \"{{server.build.env.SRV_PW}}\",\r\n            \"userGroups[1].name\": \"Admins\",\r\n            \"userGroups[1].password\": \"{{server.build.env.SRV_PW2}}\",\r\n            \"userGroups[2].name\": \"Friends\",\r\n            \"userGroups[2].password\": \"{{server.build.env.SRV_PW3}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"[Session] 'HostOnline' (up)!\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\nclear\r\nRED='\\033[0;31m'\r\nGREEN='\\033[0;32m'\r\nYELLOW='\\033[1;33m'\r\nBLUE='\\033[0;34m'\r\nNC='\\033[0m'\r\n\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${YELLOW}Enshrouded  Installscript${NC}\"\r\necho -e \"${YELLOW}Egg by gOOvER | https:\/\/goover.dev${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\n\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates jq dos2unix\r\n\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${YELLOW}download and install steamcmd. please wait...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\necho -e \"${GREEN}..done..${NC}\"\r\n\r\n## install game using steamcmd\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${YELLOW}install game using steamcmd. please wait...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\n\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) $( [[ \"${STEAM_SDK}\" == \"1\" ]] && printf %s '+app_update 1007' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit\r\necho -e \"${GREEN}..done..${NC}\"\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n# add below your custom commands if needed\r\n\r\nFILE=\/mnt\/server\/enshrouded_server.json\r\nif [ -f \"$FILE\" ]; then\r\n    echo \"Config already exist skipping\"\r\nelse \r\n    echo \"Config does not yet exist, making one\"\r\n    cd \/mnt\/server\r\n    touch enshrouded_server.json\r\n    echo \"{\" >> enshrouded_server.json\r\n    echo '\t\"name\": \"Enshrouded Server\",' >> enshrouded_server.json\r\n    echo '\t\"password\": \"\",' >> enshrouded_server.json\r\n    echo '\t\"saveDirectory\": \".\/savegame\",' >> enshrouded_server.json\r\n    echo '\t\"logDirectory\": \".\/logs\",' >> enshrouded_server.json\r\n    echo '\t\"ip\": \"0.0.0.0\",' >> enshrouded_server.json\r\n    echo '\t\"gamePort\": 15636,' >> enshrouded_server.json\r\n    echo '\t\"queryPort\": 15637,' >> enshrouded_server.json\r\n    echo '\t\"slotCount\": 16' >> enshrouded_server.json\r\n    echo '}' >> enshrouded_server.json\r\nfi\r\n## install end\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${GREEN}Installation completed...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"",
+            "script": "!\/bin\/bash\r\n# steamcmd Base Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n# Image to install with is 'ghcr.io\/ptero-eggs\/installers:debian'\r\n\r\n##\r\n#\r\n# Variables\r\n# STEAM_USER, STEAM_PASS, STEAM_AUTH - Steam user setup. If a user has 2fa enabled it will most likely fail due to timeout. Leave blank for anon install.\r\n# WINDOWS_INSTALL - if it's a windows server you want to install set to 1\r\n# SRCDS_APPID - steam app id found here - https:\/\/developer.valvesoftware.com\/wiki\/Dedicated_Servers_List\r\n# SRCDS_BETAID - beta branch of a steam app. Leave blank to install normal branch\r\n# SRCDS_BETAPASS - password for a beta branch should one be required during private or closed testing phases.. Leave blank for no password.\r\n# INSTALL_FLAGS - Any additional SteamCMD  flags to pass during install.. Keep in mind that steamcmd auto update process in the docker image might overwrite or ignore these when it performs update on server boot.\r\n# AUTO_UPDATE - Adding this variable to the egg allows disabling or enabling automated updates on boot. Boolean value. 0 to disable and 1 to enable.\r\n#\r\n ##\r\n\r\n# Install packages. Default packages below are not required if using our existing install image thus speeding up the install process.\r\n#apt -y update\r\n#apt -y --no-install-recommends install curl lib32gcc-s1 ca-certificates\r\n\r\n## just in case someone removed the defaults.\r\nif [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\n## download and install steamcmd\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\n# SteamCMD fails otherwise for some reason, even running as root.\r\n# This is changed at the end of the install process anyways.\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n# Configuring User Groups\r\n\r\nCONFIG_FILE=\"\/mnt\/server\/enshrouded_server.json\"\r\n\r\nif [[ -f \"$CONFIG_FILE\" ]]; then\r\n    echo \"Ensuring necessary user groups exist in configuration...\"\r\n\r\n    jq --arg srvname \"$SRV_NAME\" --arg pw1 \"$SRV_PW\" --arg pw2 \"$SRV_PW2\" --arg pw3 \"$SRV_PW3\" '\r\n# Ensure server name is correct\r\n.name = $srvname |\r\n\r\n# If usergroups exist, update names and passwords\r\nif .userGroups then\r\n    (.userGroups[0] | .name = \"Default\" | .password = $pw1) |\r\n\r\n    (if (.userGroups | length) > 1 then \r\n        (.userGroups[1] | .name = \"Admins\" | .password = $pw2)\r\n    else \r\n        .userGroups += [{ \"name\": \"Admins\", \"password\": $pw2 }]\r\n    end) |\r\n\r\n    (if (.userGroups | length) > 2 then \r\n        (.userGroups[2] | .name = \"Friends\" | .password = $pw3)\r\n    else \r\n        .userGroups += [{ \"name\": \"Friends\", \"password\": $pw3 }]\r\n    end)\r\n\r\nelse\r\n    # Create default user groups with correct names\/passwords\r\n    .userGroups = [\r\n        { \"name\": \"Default\", \"password\": $pw1 },\r\n        { \"name\": \"Admins\", \"password\": $pw2 },\r\n        { \"name\": \"Friends\", \"password\": $pw3 }\r\n    ]\r\nend'\r\nelse\r\n    echo \"Configuration file missing! Creating a new one...\"\r\n    cat > \"$CONFIG_FILE\" <<EOL\r\n{\r\n    \"name\": \"${SRV_NAME:-\"Enshrouded Server\"}\",\r\n    \"saveDirectory\": \".\/savegame\",\r\n    \"logDirectory\": \".\/logs\",\r\n    \"ip\": \"0.0.0.0\",\r\n    \"queryPort\": ${QUERY_PORT:-15637},\r\n    \"slotCount\": ${MAX_PLAYERS:-16},\r\n    \"userGroups\": [\r\n        {\r\n            \"canAccessInventories\": true,\r\n            \"canEditBase\": true,\r\n            \"canExtendBase\": true,\r\n            \"canKickBan\": false,\r\n            \"name\": \"Default\",\r\n            \"password\": \"${SRV_PW:-\"\"}\",\r\n            \"reservedSlots\": 0\r\n        },\r\n        {\r\n            \"name\": \"Admins\",\r\n            \"password\": \"${SRV_PW2:-\"\"}\",\r\n            \"canAccessInventories\": true,\r\n            \"canEditBase\": true,\r\n            \"canExtendBase\": true,\r\n            \"canKickBan\": true,\r\n            \"reservedSlots\": 1\r\n        },\r\n        {\r\n            \"name\": \"Friends\",\r\n            \"password\": \"${SRV_PW3:-\"\"}\",\r\n            \"canAccessInventories\": true,\r\n            \"canEditBase\": true,\r\n            \"canExtendBase\": true,\r\n            \"canKickBan\": false,\r\n            \"reservedSlots\": 3\r\n        }\r\n    ]\r\n}\r\nEOL\r\nfi\r\n\r\n## install end\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"\r\necho -e \"${GREEN}Installation completed...${NC}\"\r\necho -e \"${BLUE}-------------------------------------------------${NC}\"",
             "container": "ghcr.io\/ptero-eggs\/installers:debian",
             "entrypoint": "bash"
         }
     },
     "variables": [
-        {
-            "name": "[SERVER] Steam Query Port",
-            "description": "Steam Query Port",
-            "env_variable": "QUERY_PORT",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|numeric",
-            "field_type": "text"
-        },
-        {
-            "name": "WINDOWS_INSTALL",
-            "description": "",
-            "env_variable": "WINDOWS_INSTALL",
-            "default_value": "1",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|boolean",
-            "field_type": "text"
-        },
-        {
-            "name": "[STEAM] Steam App ID",
-            "description": "Steam App ID",
-            "env_variable": "SRCDS_APPID",
-            "default_value": "2278520",
-            "user_viewable": false,
-            "user_editable": false,
-            "rules": "required|string|in:2278520",
-            "field_type": "text"
-        },
-        {
-            "name": "[SERVER] Auto Update",
-            "description": "Enable automatic updates on boot",
-            "env_variable": "AUTO_UPDATE",
-            "default_value": "1",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "required|boolean",
-            "field_type": "text"
-        },
         {
             "name": "[SERVER] Server Name",
             "description": "Name of the server",
@@ -78,16 +38,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
-            "field_type": "text"
-        },
-        {
-            "name": "[SERVER] Server Password",
-            "description": "Server password",
-            "env_variable": "SRV_PW",
-            "default_value": "",
-            "user_viewable": true,
-            "user_editable": true,
-            "rules": "nullable|string",
             "field_type": "text"
         },
         {
@@ -101,8 +51,78 @@
             "field_type": "text"
         },
         {
+            "name": "[SERVER] Steam Query Port",
+            "description": "Steam Query Port",
+            "env_variable": "QUERY_PORT",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric",
+            "field_type": "text"
+        },
+        {
+            "name": "[USER GROUP] ''Default'' Group Password",
+            "description": "Password for the Default user-group. Players using this password get:\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: false",
+            "env_variable": "SRV_PW",
+            "default_value": "ChangeMe",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "[USER GROUP] ''Friends'' Group Password",
+            "description": "Password for the Friends user-group. Players using this password get:\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: false",
+            "env_variable": "SRV_PW3",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "[USER GROUP] ''Admin'' Group Password",
+            "description": "Password for the Admin user-group. Players using this password get:\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: true",
+            "env_variable": "SRV_PW2",
+            "default_value": "ChangeMe",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "[STEAM] Steam App ID",
+            "description": "Steam App ID",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "2278520",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|in:2278520",
+            "field_type": "text"
+        },
+        {
+            "name": "[SYSTEM] Windows Install",
+            "description": "Whether to install the Windows version",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "1",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "[SYSTEM] Auto Update",
+            "description": "Enable automatic updates on boot",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
             "name": "[SYSTEM] Validate",
-            "description": "Validate the serverfiles through Steam",
+            "description": "Validate the server files through Steam",
             "env_variable": "VALIDATE",
             "default_value": "0",
             "user_viewable": true,
