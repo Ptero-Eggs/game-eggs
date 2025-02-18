@@ -34,7 +34,7 @@
             "name": "[SERVER] Server Name",
             "description": "Name of the server",
             "env_variable": "SRV_NAME",
-            "default_value": "My Server",
+            "default_value": "My Enshrouded Server",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string",
@@ -71,9 +71,9 @@
             "field_type": "text"
         },
         {
-            "name": "[USER GROUP] ''Friends'' Group Password",
-            "description": "Password for the Friends user-group. Players using this password get:\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: false",
-            "env_variable": "SRV_PW3",
+            "name": "[USER GROUP] ''Admin'' Group Password",
+            "description": "Password for the Admin user-group. Players using this password get:\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: true",
+            "env_variable": "SRV_PW2",
             "default_value": "ChangeMe",
             "user_viewable": true,
             "user_editable": true,
@@ -81,9 +81,9 @@
             "field_type": "text"
         },
         {
-            "name": "[USER GROUP] ''Admin'' Group Password",
-            "description": "Password for the Admin user-group. Players using this password get:\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: true",
-            "env_variable": "SRV_PW2",
+            "name": "[USER GROUP] ''Friends'' Group Password",
+            "description": "Password for the Friends user-group. Players using this password get:\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: false",
+            "env_variable": "SRV_PW3",
             "default_value": "ChangeMe",
             "user_viewable": true,
             "user_editable": true,
