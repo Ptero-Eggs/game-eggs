@@ -74,7 +74,7 @@
             "name": "[USER GROUP] ''Friends'' Group Password",
             "description": "Password for the Friends user-group. Players using this password get:\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: false",
             "env_variable": "SRV_PW3",
-            "default_value": "",
+            "default_value": "ChangeMe",
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string",
