@@ -44,9 +44,9 @@ Instead of manually editing this file, **you can set most key values directly in
 Go to your **Pterodactyl Panel → Server Settings**, where you can edit:
 - **Server Name (`SRV_NAME`)** – The name players will see in the server list.
 - **User Group Passwords**:
-  - **Default Group (`SRV_PW`)** – General access for most players.
-  - **Admin Group (`SRV_PW2`)** – Grants admin privileges.
-  - **Friends Group (`SRV_PW3`)** – Grants reduced admin privileges.
+  - **Admin Group (`SRV_PW`)** – Grants admin privileges.
+  - **Friend Group (`SRV_PW2`)** – Grants reduced admin privileges.
+  - **Guest Group (`SRV_PW3`)** – General access for users.
 - **Max Players (`MAX_PLAYERS`)** – Number of player slots (1-16).
 - **Steam Query Port (`QUERY_PORT`)** – The query port for server communication.
 
@@ -68,34 +68,33 @@ On first startup, the server will generate the following structure:
     "slotCount": 16,
     "userGroups": [
         {
-            "name": "Default",
-            "password": "ChangeMe",
-            "canAccessInventories": true,
-            "canEditBase": true,
-            "canExtendBase": true,
-            "canKickBan": false,
-            "reservedSlots": 0
-        },
-        {
-            "name": "Admins",
+            "name": "Admin",
             "password": "ChangeMe",
             "canAccessInventories": true,
             "canEditBase": true,
             "canExtendBase": true,
             "canKickBan": true,
-            "reservedSlots": 1
+            "reservedSlots": 0
         },
         {
-            "name": "Friends",
+            "name": "Friend",
             "password": "ChangeMe",
             "canAccessInventories": true,
             "canEditBase": true,
             "canExtendBase": true,
             "canKickBan": false,
+            "reservedSlots": 1
+        },
+        {
+            "name": "Guest",
+            "password": "ChangeMe",
+            "canAccessInventories": false,
+            "canEditBase": false,
+            "canExtendBase": false,
+            "canKickBan": false,
             "reservedSlots": 3
         }
-    ],
-    "voiceChatMode": "Proximity"
+    ]
 }
 ```
 
