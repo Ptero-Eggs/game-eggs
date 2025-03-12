@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-01-05T18:35:54+00:00",
+    "exported_at": "2025-03-12T15:30:18+00:00",
     "name": "LeviLamina",
     "author": "eggs@purpleflaghosting.com",
     "description": "LeviLamina is an unofficial mod loader designed to offer indispensable API support for Minecraft Bedrock Edition. It boasts a comprehensive API, an array of utility interfaces, a robust event system, and comprehensive support for basic interfaces. LeviLamina provides an expansive API, a powerful event system, and a wealth of encapsulated development infrastructure interfaces, forming a solid foundation for augmenting the Minecraft Bedrock Edition with additional gameplay features and functionalities. By leveraging mods, the process of extending Bedrock functionality becomes effortless, with a user-friendly development process and an adaptable approach.",
@@ -22,7 +22,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "# Install required packages\r\napt update\r\napt install lsb-release\r\n\r\n# Install wine\r\nwget -O \/etc\/apt\/keyrings\/winehq-archive.key https:\/\/dl.winehq.org\/wine-builds\/winehq.key\r\nwget -NP \/etc\/apt\/sources.list.d\/ https:\/\/dl.winehq.org\/wine-builds\/debian\/dists\/$(lsb_release -sc 2>\/dev\/null)\/winehq-$(lsb_release -sc 2>\/dev\/null).sources\r\napt update\r\napt install --no-install-recommends winehq-stable  -y\r\n\r\n\r\ncd \/mnt\/server || { echo \"Failed to change directory\"; exit 1; }\r\n\r\n# Install lip\r\nLIP_URL=\"https:\/\/github.com\/lippkg\/lip\/releases\/latest\/download\/lip-windows-amd64.zip\"\r\nwget $LIP_URL -O lip.zip\r\nunzip -o lip.zip lip.exe\r\nrm lip.zip\r\n\r\n\r\nif [ -n \"$VERSION\" ] && [ \"$VERSION\" != \"latest\" ]; then\r\n    wine lip.exe install --yes github.com\/LiteLDev\/LeviLamina@\"$VERSION\"\r\nelse\r\n    wine lip.exe install --yes github.com\/LiteLDev\/LeviLamina\r\nfi\r\n\r\n\r\necho \"Server Installed\"\r\n\r\nif [ -f \"lip-install.txt\" ]; then\r\n    echo \"Installing packages from lip-install.txt\"\r\n    wine lip.exe install --yes --specifiers lip-install.txt\r\n    echo \"Packages installed\"\r\nfi",
+            "script": "# Install required packages\r\napt update\r\napt install lsb-release\r\n\r\n# Install wine\r\nwget -O \/etc\/apt\/keyrings\/winehq-archive.key https:\/\/dl.winehq.org\/wine-builds\/winehq.key\r\nwget -NP \/etc\/apt\/sources.list.d\/ https:\/\/dl.winehq.org\/wine-builds\/debian\/dists\/$(lsb_release -sc 2>\/dev\/null)\/winehq-$(lsb_release -sc 2>\/dev\/null).sources\r\napt update\r\napt install --no-install-recommends winehq-stable  -y\r\n\r\n\r\ncd \/mnt\/server || { echo \"Failed to change directory\"; exit 1; }\r\n\r\n# Install lip\r\nLIP_URL=\"https:\/\/github.com\/futrime\/lip\/releases\/latest\/download\/lip-cli-win-x64.zip\"\r\nwget $LIP_URL -O lip.zip\r\nunzip -o lip.zip lip.exe\r\nrm lip.zip\r\n\r\n\r\nif [ -n \"$VERSION\" ] && [ \"$VERSION\" != \"latest\" ]; then\r\n    wine lip.exe install --yes github.com\/LiteLDev\/LeviLamina@\"$VERSION\"\r\nelse\r\n    wine lip.exe install --yes github.com\/LiteLDev\/LeviLamina\r\nfi\r\n\r\n\r\necho \"Server Installed\"\r\n\r\nif [ -f \"lip-install.txt\" ]; then\r\n    echo \"Installing packages from lip-install.txt\"\r\n    wine lip.exe install --yes --specifiers lip-install.txt\r\n    echo \"Packages installed\"\r\nfi",
             "container": "ghcr.io\/ptero-eggs\/installers:debian",
             "entrypoint": "bash"
         }
