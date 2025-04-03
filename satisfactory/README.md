@@ -99,7 +99,7 @@ ___
 | Port          | Default | Protocol  | Required | Notes                                                                                                                                                  |
 |---------------|---------|-----------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Primary**   | 7777    | UDP & TCP | **Yes** | Clients connect using this port. UDP is un-encrypted game traffic. TCP is also required for the in-game Server Manager & API, and it is TLS encrypted. |
-| **Secondary** | 8888    | TCP       | **Yes** | The port used to connect the client to the server. Required when using version 1.1.                                                                    |
+| **Reliable Messaging** | 8888    | TCP       | **Yes** | Reliable messaging port. Required for Satisfactory version 1.1 and above.                                                                    |
 
 > [!TIP]
 > \*Your internal ports **must match** your external ports on your network (ie. you can't have an external port of 7778 forwarded to your 7777 internal port; they must match).
