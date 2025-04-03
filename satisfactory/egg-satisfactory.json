@@ -112,7 +112,7 @@
         },
         {
             "name": "Reliable Port",
-            "description": "If you are using version 1.1 or above you need to allocate an additional allocation so that users are able to access the server. The primary port is 8888.",
+            "description": "Reliable messaging port. Required for version 1.1 or above.",
             "env_variable": "RELIABLE_PORT",
             "default_value": "8888",
             "user_viewable": true,
