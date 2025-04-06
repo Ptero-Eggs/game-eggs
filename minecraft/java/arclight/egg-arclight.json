@@ -15,7 +15,7 @@
     ],
     "docker_images": {
         "Java 8": "ghcr.io\/ptero-eggs\/yolks:java_8",
-        "Java 11ghcr.io\/ptero-eggs\/yolks:java_11": "Java 11ghcr.io\/ptero-eggs\/yolks:java_11",
+        "Java 11": "ghcr.io\/ptero-eggs\/yolks:java_11",
         "Java 16": "ghcr.io\/ptero-eggs\/yolks:java_16",
         "Java 17": "ghcr.io\/ptero-eggs\/yolks:java_17",
         "Java 19": "ghcr.io\/ptero-eggs\/yolks:java_19",
