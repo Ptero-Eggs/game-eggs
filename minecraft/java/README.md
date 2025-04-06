@@ -25,6 +25,11 @@ An experimental Minecraft server implementation in Rust
 
 ## Forge Based
 
+### [Arclight](arclight)
+
+[Arclight Github](https://github.com/IzzelAliz/Arclight)
+A Bukkit server implementation on common mod loaders.
+
 ### [Forge](forge/forge)
 
 [Forge MC Website](https://files.minecraftforge.net)
@@ -67,11 +72,6 @@ A fast, lightweight Minecraft server written in Kotlin.
 
 [Mohist Github](https://github.com/Mohist-Community/Mohist)
 Mohist is a minecraft forge server software that implements the Paper/Spigot/Bukkit API.
-
-### [Arclight](arclight)
-
-[Arclight Github](https://github.com/IzzelAliz/Arclight)
-A Bukkit server implementation on common mod loaders.
 
 ## [Feed The Beast](ftb)
 
