@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-09-10T11:11:13-07:00",
+    "exported_at": "2025-04-02T17:59:04+02:00",
     "name": "Satisfactory",
     "author": "red_thirten@yahoo.com",
     "description": "Satisfactory is a first-person open-world factory building game with a dash of exploration and combat. Play alone or with friends, explore an alien planet, create multi-story factories, and enter conveyor belt heaven!",
@@ -15,7 +15,7 @@
         "ghcr.io\/ptero-eggs\/steamcmd:debian": "ghcr.io\/ptero-eggs\/steamcmd:debian"
     },
     "file_denylist": [],
-    "startup": ".\/Engine\/Binaries\/Linux\/*-Linux-Shipping FactoryGame -Port={{SERVER_PORT}}",
+    "startup": ".\/Engine\/Binaries\/Linux\/*-Linux-Shipping FactoryGame -Port={{SERVER_PORT}} -ReliablePort={{RELIABLE_PORT}}",
     "config": {
         "files": "{\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Game.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/Engine.GameSession].MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    },\r\n    \"FactoryGame\/Saved\/Config\/LinuxServer\/Engine.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"[\/Script\/FactoryGame.FGSaveSession].mNumRotatingAutosaves\": \"{{server.build.env.NUM_AUTOSAVES}}\",\r\n            \"[\/Script\/OnlineSubsystemUtils.IpNetDriver].InitialConnectTimeout\": \"{{server.build.env.INIT_CONNECT_TIMEOUT}}\",\r\n            \"[\/Script\/OnlineSubsystemUtils.IpNetDriver].ConnectionTimeout\": \"{{server.build.env.CONNECT_TIMEOUT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Engine Initialization\"\r\n}",
@@ -108,6 +108,16 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|integer|in:1690800",
+            "field_type": "text"
+        },
+        {
+            "name": "Reliable Port",
+            "description": "Reliable messaging port. Required for version 1.1 or above.",
+            "env_variable": "RELIABLE_PORT",
+            "default_value": "8888",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|min:0|max:65535",
             "field_type": "text"
         }
     ]

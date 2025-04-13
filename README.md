@@ -226,6 +226,8 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [Puck](./puck)
 
+#### [Sonic Robo Blast 2 (SRB2)](./sonic_robo_blast_2)
+
 ---
 
 For detailed configuration files, mod support, or server setup guides, refer to each game's folder. Please submit issues or pull requests for any improvements or additions.
