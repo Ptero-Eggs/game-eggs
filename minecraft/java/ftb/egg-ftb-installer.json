@@ -18,10 +18,10 @@
         "Java 11": "ghcr.io\/ptero-eggs\/yolks:java_11",
         "Java 16": "ghcr.io\/ptero-eggs\/yolks:java_16",
         "Java 17": "ghcr.io\/ptero-eggs\/yolks:java_17",
-        "java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
-        "java 22": "ghcr.io\/ptero-eggs\/yolks:java_22",
-        "java 23": "ghcr.io\/ptero-eggs\/yolks:java_23",
-        "java 24": "ghcr.io\/ptero-eggs\/yolks:java_24"
+        "Java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
+        "Java 22": "ghcr.io\/ptero-eggs\/yolks:java_22",
+        "Java 23": "ghcr.io\/ptero-eggs\/yolks:java_23",
+        "Java 24": "ghcr.io\/ptero-eggs\/yolks:java_24"
     },
     "file_denylist": [],
     "startup": "java $( [[ -f log4jfix\/Log4jPatcher.jar ]] && printf %s \"-javaagent:log4jfix\/Log4jPatcher.jar \" ) -Xms128M -XX:MaxRAMPercentage=95.0 -Dterminal.jline=false -Dterminal.ansi=true $( [[ ! -f unix_args.txt ]] && printf %s \"-jar start-server.jar\" || printf %s \"@unix_args.txt\" )",
