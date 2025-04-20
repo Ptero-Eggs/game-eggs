@@ -4,7 +4,7 @@
     "version": "PTDL_v2",
     "update_url": null
   },
-  "exported_at": "2023-07-07T02:29:39+02:00",
+  "exported_at": "2025-04-20T21:46:27+00:00",
   "name": "PowerNukkitX",
   "author": "powernukkitx@github.com",
   "description": "PowerNukkitX support for Pterodactyl",
@@ -15,7 +15,7 @@
   "file_denylist": [],
   "startup": ".\/pnx start {{AUTOREBOOT}}",
   "config": {
-    "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"enable-query\": \"true\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
+    "files": "{\r\n    \"server.properties\": {\r\n        \"parser\": \"properties\",\r\n        \"find\": {\r\n            \"server-ip\": \"0.0.0.0\",\r\n            \"server-port\": \"{{server.build.default.port}}\",\r\n            \"query.port\": \"{{server.build.default.port}}\"\r\n        }\r\n    }\r\n}",
     "startup": "{\r\n    \"done\": \")! For help, type \"\r\n}",
     "logs": "{}",
     "stop": "stop"
