@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-01-15T20:00:38+01:00",
+    "exported_at": "2025-04-22T19:59:52+00:00",
     "name": "Contagion",
     "author": "Fashdey@fustarmy.net",
     "description": "Contagion isn't your average Zombie Shooter but instead takes a more realistic and different approach to the popular genre with unique characters, environments, weapons, items, and a built in system that makes every round completely unpredictable with resources, objectives, and paths ever changing.",
@@ -15,12 +15,12 @@
         "wine_latest": "ghcr.io\/ptero-eggs\/yolks:wine_latest"
     },
     "file_denylist": [],
-    "startup": "wineconsole \/home\/container\/contagionds.exe -console -steam -log -condebug -conclearlog -dedicated -game \".\\contagion\" +sv_lan 0 -port {{SERVER_PORT}} +map {{SRV_MAP}} +maxplayers {{SRV_MAXPLAYERS}} +servercfgfile \"{{SRV_CONFIG}}\"  -tickrate 128",
+    "startup": "wine contagionds.exe -console -steam -log -condebug -conclearlog -dedicated -game \".\\contagion\" +sv_lan 0 -port {{SERVER_PORT}} +map {{SRV_MAP}} +maxplayers {{SRV_MAXPLAYERS}} +servercfgfile \"{{SRV_CONFIG}}\"  -tickrate 128 -log & tail -F contagion\/console.log -c0 --pid $!",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \":\/home\/container$ wineconsole \/home\/container\/contagionds.exe\"\r\n}",
+        "startup": "{\r\n    \"done\": \"Connection to Steam servers successful\"\r\n}",
         "logs": "{}",
-        "stop": "^^C"
+        "stop": "^C"
     },
     "scripts": {
         "installation": {
