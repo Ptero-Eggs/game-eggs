@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-12-14T11:28:43+01:00",
+    "exported_at": "2025-04-24T15:11:44+00:00",
     "name": "Team Fortress 2 Classic",
     "author": "eggs@scattergun.io",
     "description": "Team Fortress 2 Classic is a free mod of the 2007 game Team Fortress 2, developed by Eminoma and utilizing the Source engine.",
@@ -12,7 +12,7 @@
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/ptero-eggs\/steamcmd:debian": "ghcr.io\/ptero-eggs\/steamcmd:debian"
+        "ghcr.io\/ptero-eggs\/steamcmd:ubuntu2404": "ghcr.io\/ptero-eggs\/steamcmd:ubuntu2404"
     },
     "file_denylist": [],
     "startup": ".\/srcds_run -game {{SRCDS_GAME}} -console -port {{SERVER_PORT}} +map {{SRCDS_MAP}} +ip 0.0.0.0 -strictportbind -norestart -debug +maxplayers {{MAXPLAYERS}}",
@@ -77,6 +77,16 @@
             "default_value": "24",
             "user_viewable": true,
             "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Beta ID",
+            "description": "",
+            "env_variable": "SRCDS_BETAID",
+            "default_value": "previous2021",
+            "user_viewable": true,
+            "user_editable": false,
             "rules": "required|string|max:20",
             "field_type": "text"
         }
