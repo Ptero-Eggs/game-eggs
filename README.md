@@ -161,6 +161,7 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [Mindustry](./mindustry)
 
+
 #### Minecraft
 * [Bedrock Edition](./minecraft/bedrock)
   * [GoMint](./minecraft/bedrock/gomint)
@@ -171,6 +172,7 @@ Below is a categorized list of games with links to their respective server confi
   * [PowerNukkitX](./minecraft/bedrock/PowerNukkitX)
 * [Crossplay](./minecraft/crossplay/purpur-geysermc-floodgate)
 * [Java Edition](./minecraft/java)
+  * [CanvasMC](./minecraft/java/canvas-mc)
   * [Cuberite](./minecraft/java/cuberite)
   * [CurseForge](./minecraft/java/curseforge)
   * [Fabric](./minecraft/java/fabric)
