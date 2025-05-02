@@ -4,16 +4,16 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-01-31T11:59:34+01:00",
+    "exported_at": "2025-05-02T12:50:37+00:00",
     "name": "Foundry VTT",
     "author": "pterodactyl@demi.cloud",
     "description": "Foundry VTT is a standalone application built for experiencing multiplayer tabletop RPGs using a feature-rich and modern self-hosted application where your players connect directly through the browser.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/ptero-eggs\/yolks:nodejs_18": "ghcr.io\/ptero-eggs\/yolks:nodejs_18"
+        "ghcr.io\/ptero-eggs\/yolks:nodejs_22": "ghcr.io\/ptero-eggs\/yolks:nodejs_22"
     },
     "file_denylist": [],
-    "startup": "node .\/app\/resources\/app\/main.js --dataPath=\"\/home\/container\/data\"",
+    "startup": "node .\/app\/main.js --dataPath=\"\/home\/container\/data\"",
     "config": {
         "files": "{\r\n    \"data\/Config\/options.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"language\": \"{{server.build.env.FOUNDRY_LANGUAGE}}\",\r\n            \"updateChannel\": \"{{server.build.env.UPDATE_CHANNEL}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started and listening on port\"\r\n}",
