@@ -17,7 +17,7 @@ Automobilista 2 requires three ports to run.
 | Port        | default |
 |-------------|---------|
 | SteamPort   | 8766   |
-| Hostport    | 27015   |
+| Hostport(Default Server Port)    | 27015   |
 | queryPort   | 27016   |
 
 
