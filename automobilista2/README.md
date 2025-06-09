@@ -12,7 +12,7 @@ Automobilista 2 required at least 2GiB.
 
 ## Server Ports
 
-Astroneer requires a single port to run.
+Automobilista 2 requires three ports to run.
 
 | Port        | default |
 |-------------|---------|
