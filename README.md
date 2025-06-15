@@ -34,6 +34,8 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [Astro Colony](./astro_colony)
 
+#### [Automobilista 2](./automobilista2)
+
 #### [Avorion](./avorion)
 
 #### [Barotrauma](./barotrauma)
