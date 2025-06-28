@@ -29,7 +29,7 @@ Soulmask requires up to 3 ports. You can choose every port you want.
 - A single game process requires at least 16GB of memory and 2-4 CPU cores.
 - Bandwidth requirements: Each game server's inbound/outbound bandwidth is about 100kbps/player.
 - The game package size is about 1-2GB, requiring about 20GB of free disk space for operation.
-- 
+
 ## Mods 
 - When you want to join your modded server, activate the mods ingame in the Main menu before joining your server.
-- When adding mods , be sure there are no spaces and in " " as example: "MODID1,MODID2,MODID3"
+- When adding mods , be sure there are no spaces as example: MODID1,MODID2,MODID3
