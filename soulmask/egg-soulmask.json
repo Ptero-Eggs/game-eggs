@@ -130,7 +130,7 @@
         },
         {
             "name": "Mods",
-            "description": "Specifies the order and which mods are loaded. ModIDs need to be comma-separated and within \" \"  such as: \"ModID1,ModID2,ModID3\"",
+            "description": "Specifies the order and which mods are loaded. ModIDs need to be comma-separated such as: ModID1,ModID2,ModID3",
             "env_variable": "MOD_ID",
             "default_value": "",
             "user_viewable": true,
