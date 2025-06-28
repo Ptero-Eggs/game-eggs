@@ -1,6 +1,6 @@
 # SCP: Secret Laboratory Exiled
 
-SCP: Secret Laboratory Pterodactyl egg with Exiled Plugin Framework <https://github.com/Exiled-Team/EXILED>
+SCP: Secret Laboratory Pterodactyl egg with Exiled Plugin Framework <https://github.com/ExSLMod-Team/EXILED>
 
 ## Minimum RAM
 
