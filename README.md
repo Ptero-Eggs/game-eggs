@@ -38,6 +38,8 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [Barotrauma](./barotrauma)
 
+#### [Banana Shooter](./banana_shooter)
+
 #### [BATTALION Legacy](./battalion_legacy)
 
 #### BeamNG
