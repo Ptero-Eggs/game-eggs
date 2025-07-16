@@ -22,16 +22,18 @@ This can be changed to any port.
 > [!IMPORTANT]
 >
 > Before installing IW4x, you need to obtain a legitimate copy of Call of Duty: Modern Warfare 2 (2009) [__from Steam__](https://store.steampowered.com/app/10180/Call_of_Duty_Modern_Warfare_2_2009/).
-> Both for server installation aswell for the client.
+> - This is required for installation of the server files.
 
 > [!CAUTION]
 > [Only Steam is supported] IW4x does not support game copies from the Microsoft Store!
 
 ## Install Notes
 Memory 1GB and 20 GB storage is needed at least without modicification. 
+- For 1st time installation keep Auto Update Server on, after installation you can turn this off.
+
 ## Settings
 
-Most setting can be done by opening server.cfg and edit setting inside
+Most setting can be done by opening userraw/server.cfg and edit settings inside
 
 ## Server hosting rules 
 Can also be found at IW4X Docs (https://docs.iw4x.dev/servers/rules/).
