@@ -94,7 +94,7 @@
             "name": "Auto-update server",
             "description": "Enable auto-updating from steam",
             "env_variable": "AUTO_UPDATE",
-            "default_value": "0",
+            "default_value": "1",
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|boolean|in:0,1",
