@@ -17,7 +17,11 @@
         "java 24": "ghcr.io\/ptero-eggs\/yolks:java_24",
         "java 23": "ghcr.io\/ptero-eggs\/yolks:java_23",
         "java 22": "ghcr.io\/ptero-eggs\/yolks:java_22",
-        "java 21": "ghcr.io\/ptero-eggs\/yolks:java_21"
+        "java 21": "ghcr.io\/ptero-eggs\/yolks:java_21",
+        "Java 17": "ghcr.io\/ptero-eggs\/yolks:java_17",
+        "Java 16": "ghcr.io\/ptero-eggs\/yolks:java_16",
+        "Java 11": "ghcr.io\/ptero-eggs\/yolks:java_11",
+        "Java 8": "ghcr.io\/ptero-eggs\/yolks:java_8"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
