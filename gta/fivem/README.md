@@ -32,8 +32,16 @@ The `DOWNLOAD_URL` only needs to be used if they turn on ddos protection. The va
 txAdmin is now supported and disabled by default. You set `TXADMIN_ENABLED` to `1` to enable it.
 
 The last update to the egg changes the server to use txadmin to run. On first startup it will print a key to use to sign into the txadmin panel.
+> [!WARNING]
+> ### Your server will not go online until it's started from txadmin
 
-### Your server will not go online until it's started from txadmin
+With latest update see [txAdmin Github](https://github.com/citizenfx/txAdmin/blob/master/docs/env-config.md) some things changed.
+For now this is added:
+- TXHOST_TXA_PORT (Value can be changed by user)
+- TXHOST_GAME_NAME (Value can be changed by user)
+- TXHOST_DATA_PATH (hardcoded to /home/container/txData)
+> [!NOTE]
+> WHen using TXHOST_GAME_NAME : changing Fivem to Redm or visaversa , a reinstall is needed !
 
 ## Server Ports
 
