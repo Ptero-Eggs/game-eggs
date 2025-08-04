@@ -2,7 +2,7 @@
 
 
 ## [Documentation](https://www.sunkenlandgame.com/post/dedicated-server-user-manual)
-
+Latest document can be found in root of your container when installing server.
 Sunkenland is a Waterworld-themed survival game. Explore sunken cities, build your base, craft items, trade, and fight pirates as you struggle to survive in an aquatic post-apocalypse world plagued by hunger and violence.
 
 ## Install notes
