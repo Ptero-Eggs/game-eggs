@@ -43,5 +43,7 @@ Ports required to run the server in a table format.
 | Game Port | Can be any port |
 
 
-### Notes
-- There's no strict "server name" variable. It's tied to the World/Map Name. The install script is modified to rename the folder to whatever the users sets as `SERVER_NAME`.
+ ### Notes
+ > [!NOTE]
+> - There's no strict "server name" variable. It's tied to the World/Map Name. The install script is modified to rename the folder to whatever the users sets as `SERVER_NAME`.
+> - When you want change the server name, a reinsatall is required to let the script run the renaming of the world name. 
