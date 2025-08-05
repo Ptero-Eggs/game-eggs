@@ -2,7 +2,8 @@
 
 
 ## [Documentation](https://www.sunkenlandgame.com/post/dedicated-server-user-manual)
-Latest document can be found in root of your container when installing server.
+> [!NOTE]
+> Latest document can also be found in root of your container when installing server.
 
 Sunkenland is a Waterworld-themed survival game. Explore sunken cities, build your base, craft items, trade, and fight pirates as you struggle to survive in an aquatic post-apocalypse world plagued by hunger and violence.
 
@@ -17,22 +18,24 @@ To locate your save files on Windows, go to the following directory:
 
 On the server, you can find the map here:
 `/.wine/drive_c/users/container/AppData/LocalLow/Vector3 Studio/Sunkenland/Worlds` 
-
-**Remember** to change the `WORLD_GUID` variable, if you upload a new world to your server! Otherwise the server will crash upon launching it.
+> [!CAUTION]
+> **Remember** to change the `WORLD_GUID` variable, if you upload a new world to your server! Otherwise the server will crash upon launching it.
 
 ## Installation/System Requirements
 <!--Make changes to reflect the server minimum/recommended hardware specs-->
 |  | Bare Minimum | Recommended |
 |---------|---------|---------|
 | Game Ownership | *Server can start without it* | *Game is needed for creating custom maps* |
+| RAM | 4 GB+ | 8 GB+ |
+| Storage | 5 GB+ | 20 GB+ |
 
 ## Server Ports
 
 Ports required to run the server in a table format.
 
-| Port    | default |
+| Port    | Default |
 |---------|---------|
-| Game Port | any port |
+| Game Port | Can be any port |
 
 
 ### Notes
