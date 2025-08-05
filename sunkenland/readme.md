@@ -1,6 +1,11 @@
 # Sunkenland
 
 
+### Author & Contributers
+| Name        | Github Profile  | Buy me a Coffee |
+| ------------- |-------------|-------------|
+|   Brainshead  | https://github.com/brainshead
+
 ## [Documentation](https://www.sunkenlandgame.com/post/dedicated-server-user-manual)
 > [!NOTE]
 > Latest document can also be found in root of your container when installing server.
