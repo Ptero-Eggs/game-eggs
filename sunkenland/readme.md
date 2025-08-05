@@ -32,8 +32,8 @@ Ports required to run the server in a table format.
 
 | Port    | default |
 |---------|---------|
-| Game Port | ????? |
-| Query Port | 27015 |
+| Game Port | any port |
+
 
 ### Notes
 - There's no strict "server name" variable. It's tied to the World/Map Name. The install script is modified to rename the folder to whatever the users sets as `SERVER_NAME`.
