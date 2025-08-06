@@ -22,7 +22,13 @@ To locate your save files on Windows, go to the following directory:
 `%USERPROFILE%\AppData\LocalLow\Vector3 Studio\Sunkenland\Worlds`
 
 On the server, you can find the map here:
-`/.wine/drive_c/users/container/AppData/LocalLow/Vector3 Studio/Sunkenland/Worlds` 
+`/.wine/drive_c/users/container/AppData/LocalLow/Vector3 Studio/Sunkenland/Worlds`
+
+On this location you also find AdminSteamIDs.txt and BanSteamIDs.txt
+
+Put in Steam ID line by line of users to be admins or to be banned.
+
+
 > [!CAUTION]
 > **Remember** to change the `WORLD_GUID` variable, if you upload a new world to your server! Otherwise the server will crash upon launching it.
 
