@@ -25,6 +25,11 @@ An experimental Minecraft server implementation in Rust
 
 ## Forge Based
 
+### [Arclight](arclight)
+
+[Arclight Github](https://github.com/IzzelAliz/Arclight)
+A Bukkit server implementation on common mod loaders.
+
 ### [Forge](forge/forge)
 
 [Forge MC Website](https://files.minecraftforge.net)
