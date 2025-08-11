@@ -57,6 +57,9 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [Clone Hero](./clone_hero)
 
+#### Call of Duty / COD 
+* [IW4X](./cod/iw4x)
+
 #### [Colony Survival](./colony_survival)
 
 #### [Conan Exiles](./conan_exiles)
