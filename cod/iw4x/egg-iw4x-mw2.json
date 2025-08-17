@@ -4,9 +4,9 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-08-11T02:37:00+02:00",
+    "exported_at": "2025-08-18T01:39:33+02:00",
     "name": "IW4x",
-    "author": "brainshead@gmail.com",
+    "author": "brainshead@fmail.com",
     "description": "IW4x is a community-driven modification for Call of Duty Modern Warfare 2 (2009) that enhances the game with improved security, dedicated servers, and extensive modding capabilities.",
     "features": null,
     "docker_images": {
@@ -16,7 +16,7 @@
     "file_denylist": [],
     "startup": ".\/iw4x-launcher --update && wine iw4x.exe -dedicated -stdout +set fs_game $MOD_DIR +set sv_lanonly 0 +set net_port $SERVER_PORT +exec server.cfg +set party_enable \"0\" +map_rotate",
     "config": {
-        "files": "{}",
+        "files": "{\r\n    \"userraw\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_hostname\": \"sv_hostname {{server.environment.SERVER_NAME}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Sending heartbeat to master\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -117,6 +117,16 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Sets the server hostname.\r\n SERVER  COLORS \r\n^1 = Red , ^2 = Green, ^3 = Yellow, ^4 = Blue, ^5 = Cyan, ^6 = Pink, ^7 = White, ^8 = Depends on the team colors playing.,  ^9 = Grey, ^0 = Black, ^: = Rainbow colors.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "Pterodactyl IW4X",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
             "field_type": "text"
         }
     ]
