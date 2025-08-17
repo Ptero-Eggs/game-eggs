@@ -1,6 +1,6 @@
 # IW4X
 
-IW4x is a community-driven modification for Call of Duty Modern Warfare 2 / IW2/COD2 (2009) that enhances the game with improved security, dedicated servers, and extensive modding capabilities.
+IW4x is a community-driven modification for Call of Duty Modern Warfare 2 (2009) that enhances the game with improved security, dedicated servers, and extensive modding capabilities.
 See https://iw4x.dev/
 
  ### Author & Contributers
