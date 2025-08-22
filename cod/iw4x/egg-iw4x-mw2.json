@@ -10,8 +10,8 @@
     "description": "IW4x is a community-driven modification for Call of Duty Modern Warfare 2 (2009) that enhances the game with improved security, dedicated servers, and extensive modding capabilities.",
     "features": null,
     "docker_images": {
-        "ghcr.io\/ptero-eggs\/yolks:wine_latest": "ghcr.io\/ptero-eggs\/yolks:wine_latest",
-        "ghcr.io\/ptero-eggs\/yolks:wine_staging": "ghcr.io\/ptero-eggs\/yolks:wine_staging"
+        "Wine Latest ": " ghcr.io\/ptero-eggs\/yolks:wine_latest",
+        "Wine Staging ": " ghcr.io\/ptero-eggs\/yolks:wine_staging"
     },
     "file_denylist": [],
     "startup": ".\/iw4x-launcher --update && wine iw4x.exe -dedicated -stdout +set fs_game $MOD_DIR +set sv_lanonly 0 +set net_port $SERVER_PORT +exec server.cfg +set party_enable \"0\" +map_rotate",
