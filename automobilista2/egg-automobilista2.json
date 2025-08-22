@@ -4,25 +4,25 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-06-09T10:47:50+02:00",
+    "exported_at": "2025-08-22T09:45:14+00:00",
     "name": "Automobilista 2",
     "author": "admin@theorderofdarkness.eu",
     "description": "Egg for Automobilista 2",
-    "features": null,
+    "features": [],
     "docker_images": {
         "ghcr.io\/ptero-eggs\/yolks:wine_latest": "ghcr.io\/ptero-eggs\/yolks:wine_latest"
     },
     "file_denylist": [],
     "startup": "wine .\/DedicatedServerCmd.exe",
     "config": {
-        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"name :\": \"name : \\\"{{server.build.env.SRV_NAME}}\\\"\",\r\n            \"steamPort :\": \"steamPort : {{server.build.env.SRV_SteamPort}}\",\r\n            \"hostPort :\": \"hostPort : {{server.build.default.port}}\",\r\n            \"queryPort :\": \"queryPort : {{server.build.env.SRV_QueryPort}}\",\r\n            \"password :\": \"password : \\\"{{server.build.env.SRV_PW}}\\\"\",\r\n            \"maxPlayerCount :\": \"maxPlayerCount : {{server.build.env.SRV_MaxPlayers}}\"\r\n        }\r\n    }\r\n}",
-        "startup": "{}",
+        "files": "{\r\n    \"server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"name :\": \"name : \\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"steamPort :\": \"steamPort : {{server.build.env.STEAM_PORT}}\",\r\n            \"hostPort :\": \"hostPort : {{server.build.default.port}}\",\r\n            \"queryPort :\": \"queryPort : {{server.build.env.QUERY_PORT}}\",\r\n            \"password :\": \"password : \\\"{{server.build.env.SERVER_PASSWORD}}\\\"\",\r\n            \"maxPlayerCount :\": \"maxPlayerCount : {{server.build.env.MAX_PLAYERS}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"\\u001b[?25h\\u001b[?25l\\u001b[K\\u001b[1C\\u001b[?25h\\u001b[?25ls\\u001b[?25h\\u001b[?25lw\\u001b[?25h\\u001b[?25li\\u001b[?25h\\u001b[?25lt\\u001b[?25h\\u001b[?25lc\\u001b[?25h\\u001b[?25lh\\u001b[?25h\\u001b[?25li\\u001b[?25h\\u001b[?25ln\\u001b[?25h\\u001b[?25lg\\u001b[?25h\\u001b[?25l\\u001b[K\\u001b[1C\\u001b[?25h\\u001b[?25lt\\u001b[?25h\\u001b[?25lo\\u001b[?25h\\u001b[?25l\\u001b[K\\u001b[1C\\u001b[?25h\\u001b[?25lr\\u001b[?25h\\u001b[?25lu\\u001b[?25h\\u001b[?25ln\\u001b[?25h\\u001b[?25ln\\u001b[?25h\\u001b[?25li\\u001b[?25h\\u001b[?25ln\\u001b[?25h\\u001b[?25lg\\u001b[?25h\\u001b[?25l\\u001b[K\\u001b[1C\\u001b[?25h\\u001b[?25ls\\u001b[?25h\\u001b[?25lt\\u001b[?25h\\u001b[?25la\\u001b[?25h\\u001b[?25lt\\u001b[?25h\\u001b[?25le\\u001b[?25h\"\r\n}",
         "logs": "{}",
         "stop": "^C"
     },
     "scripts": {
         "installation": {
-            "script": "if [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/serve\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "script": "if [[ \"${STEAM_USER}\" == \"\" ]] || [[ \"${STEAM_PASS}\" == \"\" ]]; then\r\n    echo -e \"steam user is not set.\\n\"\r\n    echo -e \"Using anonymous user.\\n\"\r\n    STEAM_USER=anonymous\r\n    STEAM_PASS=\"\"\r\n    STEAM_AUTH=\"\"\r\nelse\r\n    echo -e \"user set to ${STEAM_USER}\"\r\nfi\r\n\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nmkdir -p \/mnt\/server\/steamapps # Fix steamcmd disk write error when this folder is missing\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\n\r\n## install game using steamcmd\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login ${STEAM_USER} ${STEAM_PASS} ${STEAM_AUTH} $( [[ \"${WINDOWS_INSTALL}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) +app_update ${SRCDS_APPID} $( [[ -z ${SRCDS_BETAID} ]] || printf %s \"-beta ${SRCDS_BETAID}\" ) $( [[ -z ${SRCDS_BETAPASS} ]] || printf %s \"-betapassword ${SRCDS_BETAPASS}\" ) ${INSTALL_FLAGS} validate +quit ## other flags may be needed depending on install. looking at you cs 1.6\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\ncd $HOME\r\nif [ ! -f \"server.cfg\" ] ; then\r\n    echo \"Installing default config file\"\r\n    cp config_sample\/server_with_lists.cfg server.cfg\r\nfi\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
             "container": "ghcr.io\/ptero-eggs\/installers:debian",
             "entrypoint": "bash"
         }
@@ -59,9 +59,19 @@
             "field_type": "text"
         },
         {
+            "name": "Wine Debug",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
             "name": "Server Name",
             "description": "",
-            "env_variable": "SRV_NAME",
+            "env_variable": "SERVER_NAME",
             "default_value": "Ptero Default",
             "user_viewable": true,
             "user_editable": true,
@@ -71,7 +81,7 @@
         {
             "name": "Query Port",
             "description": "",
-            "env_variable": "SRV_QueryPort",
+            "env_variable": "QUERY_PORT",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -81,7 +91,7 @@
         {
             "name": "Steam Port",
             "description": "",
-            "env_variable": "SRV_SteamPort",
+            "env_variable": "STEAM_PORT",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -91,7 +101,7 @@
         {
             "name": "Server Password",
             "description": "",
-            "env_variable": "SRV_PW",
+            "env_variable": "SERVER_PASSWORD",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
@@ -101,7 +111,7 @@
         {
             "name": "Max Players",
             "description": "",
-            "env_variable": "SRV_MaxPlayers",
+            "env_variable": "MAX_PLAYERS",
             "default_value": "16",
             "user_viewable": true,
             "user_editable": true,
