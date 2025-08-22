@@ -46,7 +46,7 @@ Ports required to run the server in a table format.
 
 | Port    | Default |
 |---------|---------|
-| Game Port | Can be any port |
+| Game Port | Default |
 
 
  ### Notes
