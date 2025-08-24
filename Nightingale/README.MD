@@ -80,4 +80,8 @@ By default this will bind to localhost only. To bind to a specific IP,
 
 add -ini:Engine:[HTTPServer.Listeners]:+ListenerOverrides=(Port=<port>,BindAddress=<IP>) to the commandline as well, or use 0.0.0.0 to bind to all available interfaces.
 
+## Mod Support
+No Official Support!
+
+Not tested
 
