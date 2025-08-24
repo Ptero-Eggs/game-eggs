@@ -72,16 +72,12 @@ Players will need to authenticate with the admin password to use the cheats in-g
 
 Status Endpoint (not built in egg )
 
-To enable scraping server status from an http endpoint, add -statusPort=<port> to the
+To enable scraping server status from an http endpoint, add -statusPort=<port> to the commandline, where <port> is a port in the range 1024-65535.
 
-commandline, where <port> is a port in the range 1024-65535. Status can be scraped from
+Status can be scraped from  the /status endpoint periodically.
 
-the /status endpoint periodically.
+By default this will bind to localhost only. To bind to a specific IP, 
 
-By default this will bind to localhost only. To bind to a specific IP, add
-
--ini:Engine:[HTTPServer.Listeners]:+ListenerOverrides=(Port=<port>,BindAddress
-
-=<IP>) as well, or use 0.0.0.0 to bind to all available interfaces.
+add -ini:Engine:[HTTPServer.Listeners]:+ListenerOverrides=(Port=<port>,BindAddress=<IP>) to the commandline as well, or use 0.0.0.0 to bind to all available interfaces.
 
 
