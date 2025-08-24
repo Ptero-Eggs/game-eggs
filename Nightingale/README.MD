@@ -14,6 +14,7 @@ Nightingale requires up to 1 ports
 | Port    | default       |
 |---------|---------------|
 | Game    | 7777          |
+| Status  | ????          |
 
 This can be changed to any port.
 
@@ -79,6 +80,10 @@ Status can be scraped from  the /status endpoint periodically.
 By default this will bind to localhost only. To bind to a specific IP, 
 
 add -ini:Engine:[HTTPServer.Listeners]:+ListenerOverrides=(Port=<port>,BindAddress=<IP>) to the commandline as well, or use 0.0.0.0 to bind to all available interfaces.
+
+If the server is still loading and not yet ready for players, it will return a 503 Server Unavailable http status and a JSON object
+
+Once the server is ready for players, it will return a 200 OK status and a JSON object
 
 ## Mod Support
 No Official Support!
