@@ -28,7 +28,38 @@ This can be changed to any port.
 ## Settings
 
 Most setting can be done by Panel Variable Settings.
+
 Location of server Files : NWX/Config/ServerSettings.ini
+
+## Persistence (Saved Data)
+
+Realm data is be stored in: NWX/Saved/Offline/DedicatedServer/Deploy
+
+Character data is stored in: NWX/Saved/Offline/<PlatformID>/Profiles where
+
+PlatformID is the Steam or Epic ID of each connecting user.
+
+Backups
+
+Copying the following directories to a backup location is sufficient to capture the state of a Nightingale dedicated server:
+
+● NWX/Saved/Offline
+
+● NWX/Saved/Config
+
+● NWX/Config
+
+The first time the dedicated server is launched on a particular weekday, it will copy the Offline
+
+directory into the OfflineBackup directory.
+
+Resetting Server Persistence
+
+To reset the server to an empty state, remove the following directories:
+
+● NWX/Saved/Offline
+
+● NWX/Saved/Config
 
 
 
