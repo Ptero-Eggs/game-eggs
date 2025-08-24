@@ -53,7 +53,7 @@ The first time the dedicated server is launched on a particular weekday, it will
 
 directory into the OfflineBackup directory.
 
-Resetting Server Persistence
+## Resetting Server Persistence
 
 To reset the server to an empty state, remove the following directories:
 
@@ -61,5 +61,27 @@ To reset the server to an empty state, remove the following directories:
 
 ● NWX/Saved/Config
 
+## Enabling Cheats Mode on Clients
+To enable debug/cheats, the client must be launched with the -EnableCheats commandline argument.
+
+Players will need to authenticate with the admin password to use the cheats in-game
+> [!IMPORTANT]
+> Also Server need to have Cheats enabled
+
+## Further Adjustements available
+
+Status Endpoint (not built in egg )
+
+To enable scraping server status from an http endpoint, add -statusPort=<port> to the
+
+commandline, where <port> is a port in the range 1024-65535. Status can be scraped from
+
+the /status endpoint periodically.
+
+By default this will bind to localhost only. To bind to a specific IP, add
+
+-ini:Engine:[HTTPServer.Listeners]:+ListenerOverrides=(Port=<port>,BindAddress
+
+=<IP>) as well, or use 0.0.0.0 to bind to all available interfaces.
 
 
