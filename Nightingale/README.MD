@@ -18,9 +18,9 @@ Nightingale requires up to 1 ports
 This can be changed to any port.
 
 ## Install Notes
-|Minimal Requirements | Memory| Storage | 
+| Requirements        | Memory| Storage | 
 |---------------------------------------|
-|                     | 4GB   | 15 GB   |
+| Minimal             | 4GB   | 15 GB   |
 
 
 ## Settings
