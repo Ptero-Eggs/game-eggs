@@ -206,6 +206,8 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [Neverwinter Nights: Enhanced Edition](./neverwinter_nights_ee)
 
+#### [Nightingale](./Nightingale)
+
 #### [Night of the Dead](./night_of_the_dead)
 
 #### [No More Room in Hell (NMRIH)](./nmrih)
