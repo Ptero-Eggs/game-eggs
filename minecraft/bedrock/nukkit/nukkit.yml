@@ -4,7 +4,7 @@
 
 settings:
  #Multi-language setting
- #Available: eng, chs, cht, jpn, rus, spa, pol, bra, kor, ukr, deu
+ #Available: eng, chs, cht, jpn, rus, spa, pol, bra, kor, ukr, deu, ltu, idn, cze, tur, fin
  language: "eng"
  #Whether to send all strings translated to server locale or let the device handle them
  force-language: false
@@ -22,41 +22,19 @@ network:
  #Set to 0 to compress everything, -1 to disable
  batch-threshold: 256
  #Compression level used of Zlib when sending batched packets. Higher = more CPU, less bandwidth usage
- compression-level: 7
- #Use AsyncTasks for compression. Adds half/one tick delay, less CPU load on main thread
- async-compression: false
+ compression-level: 5
+ #Enable high performance packet compression using Snappy (experimental)
+ compression-use-snappy: false
+ #Enable network encryption
+ encryption: true
 
 debug:
  #If > 1, it will show debug messages in the console
  level: 1
- #Enables commands: /status /gc
- commands: false
-
-timings:
- #Enable core and plugin timings by default
- enabled: false
- #Enable monitoring at verbose level, include high-frequency timings
- verbose: false
- #Interval between history frames in ticks
- #Default is 5 minutes (6000 ticks)
- history-interval: 6000
- #Length of the whole timing history in ticks
- #Default is 1 hour (72000 ticks)
- #This value is capped at a maximum of history-interval * 12
- history-length: 72000
- #For special cases of servers with special permission to bypass the max
- #This max helps keep data file sizes reasonable for processing on Aikar's Timing parser side
- #Setting this will not help you bypass the max unless Aikar has added an exception on the API side
- bypass-max: false
- #If set to true, name of your server won't be sent
- privacy: false
- #Settings sections to ignore. These sections won't be sent to Aikar's Timing parser
- #For example: [all] or [settings, timings]
- ignore: []
 
 level-settings:
  #The default format that levels will use when created
- default-format: mcregion
+ default-format: leveldb
  #Automatically change levels tick rate to maintain 20 ticks per second
  auto-tick-rate: true
  auto-tick-rate-limit: 20
@@ -68,8 +46,6 @@ level-settings:
 chunk-sending:
  #Amount of chunks sent to players per tick
  per-tick: 4
- #Amount of chunks sent around each player
- max-chunks: 192
  #Amount of chunks that need to be sent before spawning the player
  spawn-threshold: 56
  #Save a serialized copy of the chunk in memory for faster sending
@@ -81,7 +57,6 @@ chunk-ticking:
  per-tick: 40
  #Radius of chunks around a player to tick
  tick-radius: 3
- light-updates: false
  clear-tick-list: false
 
 chunk-generation:
@@ -90,24 +65,25 @@ chunk-generation:
  #Max. amount of chunks in the waiting queue to be populated
  population-queue-size: 8
 
-ticks-per:
- animal-spawns: 400
- monster-spawns: 1
- autosave: 6000
- cache-cleanup: 900
+leveldb:
+ #Use native LevelDB implementation for better performance
+ use-native: false
+ #Set LevelDB memory cache size
+ cache-size-mb: 80
 
-spawn-limits:
- #Max amount of these entities
- monsters: 70
- animals: 15
- water-animals: 5
- ambient: 15
- 
+ticks-per:
+ #How often worlds and player data are saved when auto-save=on in server.properties
+ autosave: 6000
+
 player:
  #If true, player data will be saved as players/playername.dat
  #If false, nukkit won't save player data as "dat" files, in order that plugins can do something on it.
  save-player-data: true
- 
+ #The time between skin change action in seconds, set to 0 if you dont want the cooldown
+ skin-change-cooldown: 15
+ #Attacking entities resets sprinting, you can disable that here
+ attack-stop-sprint: true
+
 aliases:
  #Aliases for commands
  #Examples:
@@ -115,8 +91,13 @@ aliases:
  #savestop: [save-all, stop]
 
 worlds:
- #These settings will override the generator set in server.properties and allows loading multiple levels
- #Example:
- #world:
- # seed: 404
- # generator: FLAT:2;7,59x1,3x3,2;1;decoration(treecount=80 grasscount=45)
+ #Worlds that the server will use. Options are specific to the chosen generator, and may result in broken generation or
+ #be ignored completely.
+ world:
+  #seed: 404
+  generator: normal
+  #options:
+ nether:
+  #seed: my_cool_nether_seed
+  generator: nether
+  #options:
