@@ -14,7 +14,6 @@ Nightingale requires up to 1 ports
 | Port    | default       |
 |---------|---------------|
 | Game    | 7777          |
-| Status  | ????          |
 
 This can be changed to any port.
 
