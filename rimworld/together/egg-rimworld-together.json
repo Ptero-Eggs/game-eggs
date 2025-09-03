@@ -4,18 +4,18 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-04-02T10:31:49+02:00",
+    "exported_at": "2025-09-03T17:06:25+00:00",
     "name": "Rimworld Together",
     "author": "josdekurk@gmail.com",
     "description": "A community driven multiplayer mod, for Rimworld.",
-    "features": null,
+    "features": [],
     "docker_images": {
         "ghcr.io\/ptero-eggs\/yolks:dotnet_7": "ghcr.io\/ptero-eggs\/yolks:dotnet_7"
     },
     "file_denylist": [],
     "startup": ".\/GameServer",
     "config": {
-        "files": "{\r\n    \"Core\/ServerConfig.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"IP\": \"0.0.0.0\",\r\n            \"Port\": \"{{server.build.default.port}}\",\r\n            \"MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"verboseLogs\": \"{{server.build.env.VERBOSE}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"Configs\/ServerConfig.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"IP\": \"0.0.0.0\",\r\n            \"Port\": \"{{server.build.default.port}}\",\r\n            \"MaxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"VerboseLogs\": \"{{server.build.env.VERBOSE}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server launched\"\r\n}",
         "logs": "{}",
         "stop": "quit"
