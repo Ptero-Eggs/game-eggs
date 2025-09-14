@@ -2,20 +2,20 @@
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
         "version": "PTDL_v2",
-        "update_url": null
+        "update_url": "https:\/\/pterodactyleggs.com\/egg\/685551152d414723a7ab2091\/download"
     },
+    "exported_at": "2025-09-14T17:11:56+02:00",
     "name": "SCUM",
     "author": "eggs@purpleflaghosting.com",
-    "exported_at": "2025-06-19T16:17:23+00:00",
     "description": "SCUM is the hardest and most realistic open world survival game, where every aspect of survival is done in important details. From inventory management, weapon maintenance, stamina management to the most detailed metabolism system ever created in a video game. Think you have what it takes? Deploy on the island and find out!",
     "features": [
         "steam_disk_space"
     ],
     "docker_images": {
-        "ghcr.io\/ptero-eggs\/yolks:wine_latest": "ghcr.io\/ptero-eggs\/yolks:wine_latest"
+        "ghcr.io\/ptero-eggs\/yolks:wine_staging": "ghcr.io\/ptero-eggs\/yolks:wine_staging"
     },
     "file_denylist": [],
-    "startup": "wine64 .\/SCUM\/Binaries\/Win64\/SCUMServer.exe -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -MaxPlayers={{MAX_PLAYERS}} & tail -c0 -F .\/SCUM\/Saved\/Logs\/SCUM.log --pid=$!",
+    "startup": "wine .\/SCUM\/Binaries\/Win64\/SCUMServer.exe -Port={{SERVER_PORT}} -QueryPort={{QUERY_PORT}} -MaxPlayers={{MAX_PLAYERS}} & tail -c0 -F .\/SCUM\/Saved\/Logs\/SCUM.log --pid=$!",
     "config": {
         "files": "{\r\n    \"SCUM\/Saved\/Config\/WindowsServer\/ServerSettings.ini\": {\r\n        \"parser\": \"ini\",\r\n        \"find\": {\r\n            \"General.[scum.ServerName]\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"General.[scum.ServerDescription]\": \"{{server.build.env.SERVER_DESCRIPTION}}\",\r\n            \"General.[scum.ServerPassword]\": \"{{server.build.env.SERVER_PASSWORD}}\",\r\n            \"General.[scum.ServerPlaystyle]\": \"{{server.build.env.SERVER_PLAYSTYLE}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Config entry: GameID scum\"\r\n}",
@@ -114,10 +114,10 @@
             "name": "WINETRICKS_RUN",
             "description": "",
             "env_variable": "WINETRICKS_RUN",
-            "default_value": "vcrun2022 dotnet35",
+            "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string",
+            "rules": "nullable|string",
             "field_type": "text"
         },
         {
@@ -138,6 +138,16 @@
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|integer|between:1024,65535",
+            "field_type": "text"
+        },
+        {
+            "name": "Xvfb",
+            "description": "Enable\/Disable Xvfb",
+            "env_variable": "XVFB",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "boolean",
             "field_type": "text"
         }
     ]
