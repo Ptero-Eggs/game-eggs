@@ -137,6 +137,7 @@ Below is a categorized list of games with links to their respective server confi
 #### Half-Life Dedicated Server (HLDS)
 * [ReHLDS](./hlds_server/rehlds)
 * [Vanilla](./hlds_server/vanilla)
+* [Half-Life 2: Deathmatch](./half_life_2_deathmatch/)
 
 #### [Hogwarp](./hogwarp)
 
