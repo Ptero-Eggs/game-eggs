@@ -4,7 +4,9 @@ Renown is an intense medieval multiplayer survival experience set in a vast, eve
 [!WARNING]The "Direct" connection option is currently broken with no ETA for a fix. You will need to enable public listing and connect via the server list. Set a password to keep it secure.
 
 
-
+## System Requirements
+| RAM | 5GB+ |
+| Storage | 15 GB |
 
 ## Server Ports
 
