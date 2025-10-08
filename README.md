@@ -239,7 +239,9 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [Pavlov VR](./pavlov_vr)
 
-### [SCUM](./scum)
+#### [Renown](./renown)
+
+#### [SCUM](./scum)
 
 #### [Puck](./puck)
 
