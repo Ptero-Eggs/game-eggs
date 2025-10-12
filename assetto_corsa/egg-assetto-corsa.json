@@ -17,7 +17,7 @@
     "file_denylist": [],
     "startup": ".\/acServer",
     "config": {
-        "files": "{\r\n    \"cfg\/server_cfg.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"NAME\": \"NAME={{server.build.env.HOSTNAME}}\",\r\n            \"PASSWORD\": \"PASSWORD={{server.build.env.PASSWORD}}\",\r\n            \"ADMIN_PASSWORD\": \"ADMIN_PASSWORD={{server.build.env.ADM_PASSWORD}}\",\r\n            \"UDP_PORT\": \"UDP_PORT={{server.build.default.port}}\",\r\n            \"TCP_PORT\": \"TCP_PORT={{server.build.default.port}}\",\r\n            \"HTTP_PORT\": \"HTTP_PORT={{server.build.env.HTTP_PORT}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"cfg\/server_cfg.ini\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"NAME\": \"NAME={{server.build.env.HOSTNAME}}\",\r\n            \"PASSWORD\": \"PASSWORD={{server.build.env.PASSWORD}}\",\r\n            \"ADMIN_PASSWORD\": \"ADMIN_PASSWORD={{server.build.env.ADMIN_PASSWORD}}\",\r\n            \"UDP_PORT\": \"UDP_PORT={{server.build.default.port}}\",\r\n            \"TCP_PORT\": \"TCP_PORT={{server.build.default.port}}\",\r\n            \"HTTP_PORT\": \"HTTP_PORT={{server.build.env.HTTP_PORT}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Server started\"\r\n}",
         "logs": "{}",
         "stop": "^C"
