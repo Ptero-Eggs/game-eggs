@@ -1,3 +1,3 @@
-# Garry's Mod egg
+# Garry's Mod
 
-A copy of the one already available in Pterodacty with the addition of the "maxplayers" setting.
+Garry's Mod is a physics sandbox. There aren't any predefined aims or goals. We give you the tools and leave you to play.
