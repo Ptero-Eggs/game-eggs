@@ -156,6 +156,8 @@ Below is a categorized list of games with links to their respective server confi
 #### [Killing Floor 2](./killing_floor_2)
 
 #### [Kerbal Space Program (KSP)](./ksp)
+* [Dark Multiplayer](./ksp/DMP)
+* [Luna Multiplayer](./ksp/LMP)
 
 #### [League Sandbox](./leaguesandbox)
 
