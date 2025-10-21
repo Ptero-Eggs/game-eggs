@@ -1,0 +1,133 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": "https:\/\/pterodactyleggs.com\/egg\/68a86f0d3b8d86e66fb92a42\/download\/egg-iw4x-mw2.json"
+    },
+    "exported_at": "2025-10-21T20:36:12+02:00",
+    "name": "IW4x",
+    "author": "brainshead@gmail.com",
+    "description": "IW4x is a community-driven modification for Call of Duty Modern Warfare 2 (2009) that enhances the game with improved security, dedicated servers, and extensive modding capabilities.",
+    "features": null,
+    "docker_images": {
+        "Wine Latest ": "ghcr.io\/ptero-eggs\/yolks:wine_latest",
+        "Wine Staging ": "ghcr.io\/ptero-eggs\/yolks:wine_staging"
+    },
+    "file_denylist": [],
+    "startup": ".\/glibc\/glibc-2.39-install\/lib\/ld-linux-x86-64.so.2 --library-path .\/glibc\/glibc-2.39-install\/lib:\/usr\/lib\/x86_64-linux-gnu .\/iw4x-launcher -u && wine iw4x.exe -dedicated -stdout +set fs_game $MOD_DIR +set net_port $SERVER_PORT +set sv_lanonly 0 +exec server.cfg +set party_enable \"0\" +map_rotate",
+    "config": {
+        "files": "{\r\n    \"userraw\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"set sv_hostname\": \"set sv_hostname {{server.build.env.SERVER_NAME}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Sending heartbeat to master\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\nexport DEBIAN_FRONTEND=noninteractive\r\n\r\necho \"-----------------------------------------\"\r\necho \" IW4x Installer (GLIBC 2.39) \"\r\necho \"-----------------------------------------\"\r\n\r\n# --- System setup ---\r\napt-get update\r\napt-get install -y --no-install-recommends \\\r\n    xz-utils build-essential wget curl unzip patchelf git \\\r\n    gawk bison python3 python3-dev libc6-dev make gcc g++ pkg-config \\\r\n    gettext locales ca-certificates\r\n\r\nlocale-gen en_US.UTF-8\r\nexport LANG=en_US.UTF-8\r\nexport LC_ALL=en_US.UTF-8\r\n\r\n# --- Variables ---\r\nGLIBC_VERSION='2.39'\r\nGLIBC_PARENT_DIR=\"\/mnt\/server\/glibc\"\r\nGLIBC_SRC_DIR=\"${GLIBC_PARENT_DIR}\/glibc-${GLIBC_VERSION}\"\r\nGLIBC_BUILD_DIR=\"${GLIBC_PARENT_DIR}\/glibc-${GLIBC_VERSION}-build\"\r\nGLIBC_INSTALL_DIR=\"${GLIBC_PARENT_DIR}\/glibc-${GLIBC_VERSION}-install\"\r\n\r\n# --- Build GLIBC (skip if already built) ---\r\nif [ -f \"${GLIBC_INSTALL_DIR}\/lib\/ld-linux-x86-64.so.2\" ]; then\r\n  echo \"[GLIBC] Found existing GLIBC ${GLIBC_VERSION}, skipping build.\"\r\nelse\r\n  echo \"[GLIBC] Building GLIBC ${GLIBC_VERSION}...\"\r\n  mkdir -p \"${GLIBC_PARENT_DIR}\"\r\n  cd \"${GLIBC_PARENT_DIR}\"\r\n\r\n  wget -nc \"https:\/\/ftp.gnu.org\/gnu\/glibc\/glibc-${GLIBC_VERSION}.tar.xz\"\r\n  tar xJf \"glibc-${GLIBC_VERSION}.tar.xz\"\r\n\r\n  rm -rf \"${GLIBC_BUILD_DIR}\"\r\n  mkdir -p \"${GLIBC_BUILD_DIR}\" \"${GLIBC_INSTALL_DIR}\"\r\n  cd \"${GLIBC_BUILD_DIR}\"\r\n\r\n  \"${GLIBC_SRC_DIR}\/configure\" --prefix=\"${GLIBC_INSTALL_DIR}\" --disable-werror\r\n  make -j\"$(nproc)\"\r\n  make install\r\n  echo \"[GLIBC] Build complete.\"\r\nfi\r\n\r\n# --- SteamCMD Setup ---\r\necho \"[SteamCMD] Setting up...\"\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncd \/tmp\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\nrm -f steamcmd.tar.gz\r\ncd \/mnt\/server\/steamcmd\r\nchmod +x steamcmd.sh || true\r\nchown -R root:root \/mnt || true\r\nexport HOME=\/mnt\/server\r\n\r\n# --- Steam credentials ---\r\nif [ -z \"${STEAM_USER:-}\" ]; then\r\n  echo \"[SteamCMD] Steam user not set, defaulting to anonymous for main install (some apps may fail).\"\r\n  STEAM_USER=anonymous\r\n  STEAM_PASS=\"\"\r\n  STEAM_AUTH=\"\"\r\nfi\r\n\r\n# --- Download dependencies anonymously ---\r\necho \"[SteamCMD] Downloading MW2 runtime dependencies...\"\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login anonymous +app_update 1628350 validate +quit || true\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login anonymous +app_update 1493710 validate +quit || true\r\n\r\n# --- Download main MW2 app (requires user account) ---\r\necho \"[SteamCMD] Downloading MW2 game files (AppID ${SRCDS_APPID:-10190})...\"\r\n.\/steamcmd.sh +force_install_dir \/mnt\/server +login \"${STEAM_USER}\" \"${STEAM_PASS}\" \"${STEAM_AUTH}\" \\\r\n  $( [[ \"${WINDOWS_INSTALL:-0}\" == \"1\" ]] && printf %s '+@sSteamCmdForcePlatformType windows' ) \\\r\n  +app_update \"${SRCDS_APPID:-10190}\" ${INSTALL_FLAGS:-} validate +quit || true\r\n\r\n# --- Steam SDK setup ---\r\nmkdir -p \/mnt\/server\/.steam\/sdk32 \/mnt\/server\/.steam\/sdk64\r\ncp -v linux32\/steamclient.so \/mnt\/server\/.steam\/sdk32\/steamclient.so 2>\/dev\/null || true\r\ncp -v linux64\/steamclient.so \/mnt\/server\/.steam\/sdk64\/steamclient.so 2>\/dev\/null || true\r\n\r\n# --- IW4x Launcher ---\r\necho \"[IW4x] Downloading launcher...\"\r\ncd \/mnt\/server\r\nwget -q -O iw4x-launcher-x86_64.tar.gz https:\/\/github.com\/iw4x\/launcher\/releases\/latest\/download\/iw4x-launcher-x86_64-unknown-linux-gnu.tar.gz\r\ntar xfv iw4x-launcher-x86_64.tar.gz || true\r\nrm -f iw4x-launcher-x86_64.tar.gz\r\nchmod +x iw4x-launcher || true\r\n\r\n# --- Patch launcher to use local GLIBC ---\r\nif [ -f .\/iw4x-launcher ]; then\r\n  echo \"[IW4x] Patching launcher for GLIBC ${GLIBC_VERSION}...\"\r\n  patchelf --set-interpreter \"${GLIBC_INSTALL_DIR}\/lib\/ld-linux-x86-64.so.2\" \\\r\n           --add-rpath \"${GLIBC_INSTALL_DIR}\/lib\" .\/iw4x-launcher || true\r\nfi\r\n\r\n# --- Server Configs ---\r\necho \"[IW4x] Fetching default server configs...\"\r\nwget -q https:\/\/github.com\/iw4x\/iw4-server-configs\/archive\/main.zip -O \/tmp\/iw4-server-configs-main.zip\r\nunzip -o \/tmp\/iw4-server-configs-main.zip -d \/mnt\/server\r\nmv -f \/mnt\/server\/iw4-server-configs-main\/* \/mnt\/server\/ || true\r\nrmdir \/mnt\/server\/iw4-server-configs-main 2>\/dev\/null || true\r\nrm -f \/tmp\/iw4-server-configs-main.zip \/mnt\/server\/LICENSE \/mnt\/server\/README.md || true\r\n\r\n# --- Ensure userraw configs exist at root ---\r\nif [ -d \"\/mnt\/server\/userraw\" ]; then\r\n  echo \"[IW4x] userraw directory found. Ensuring correct placement...\"\r\nelse\r\n  echo \"[IW4x] Copying missing userraw directory...\"\r\n  mkdir -p \/mnt\/server\/userraw\r\n  cp -r \/mnt\/server\/iw4-server-configs-main\/userraw\/* \/mnt\/server\/userraw\/ 2>\/dev\/null || true\r\nfi\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed successfully!\"\r\necho \"-----------------------------------------\"",
+            "container": "ghcr.io\/ptero-eggs\/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam User",
+            "description": "This is a required setting and cannot be set to anonymous.",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Steam User Password",
+            "env_variable": "STEAM_PASS",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Game ID",
+            "description": "The ID corresponding to the game to download and run using SRCDS",
+            "env_variable": "SRCDS_APPID",
+            "default_value": "10190",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "string",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Auth",
+            "description": "Steam account auth code. Required if you have 2fa enabled",
+            "env_variable": "STEAM_AUTH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:5",
+            "field_type": "text"
+        },
+        {
+            "name": "Auto Update Server",
+            "description": "This is to auto-update the game server",
+            "env_variable": "AUTO_UPDATE",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Windows Install",
+            "description": "",
+            "env_variable": "WINDOWS_INSTALL",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Winetricks",
+            "description": "",
+            "env_variable": "WINETRICKS_RUN",
+            "default_value": "vcrun2022",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Wine Debug",
+            "description": "",
+            "env_variable": "WINEDEBUG",
+            "default_value": "-all",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Mod Dir",
+            "description": "Name of the Dir where the mod are.",
+            "env_variable": "MOD_DIR",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Name",
+            "description": "Sets the server hostname.\r\n SERVER  COLORS \r\n^1 = Red , ^2 = Green, ^3 = Yellow, ^4 = Blue, ^5 = Cyan, ^6 = Pink , ^7 = White , ^8 = Depends on the team colors playing.,  ^9 = Grey, ^0 = Black, ^: = Rainbow colors.",
+            "env_variable": "SERVER_NAME",
+            "default_value": "\"Pterodactyl IW4X\"",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|regex:\/^\".*\"$\/|max:100",
+            "field_type": "text"
+        }
+    ]
+}
