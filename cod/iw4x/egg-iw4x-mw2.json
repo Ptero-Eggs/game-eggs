@@ -83,7 +83,7 @@
             "name": "Windows Install",
             "description": "",
             "env_variable": "WINDOWS_INSTALL",
-            "default_value": "0",
+            "default_value": "1",
             "user_viewable": false,
             "user_editable": false,
             "rules": "required|string|max:20",
