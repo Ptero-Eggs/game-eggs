@@ -37,6 +37,8 @@ Files can be found on
 
 ## Install Notes
 Memory 1GB and 20 GB storage is needed at least without modicification.
+> [!IMPORTANT]
+> Firtst time install take some time extra (5 min+) to build GLIBC 2.39 that is needed for the IW4X Launcher.
 
 ## Settings
 
