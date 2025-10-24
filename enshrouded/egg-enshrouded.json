@@ -52,7 +52,7 @@
         },
         {
             "name": "[USER GROUP] ''Admin'' Group Password",
-            "description": "Password for the Admin user-group. Players using this password get:\r\nThe passwords for the usergroups can not all be the same or empty\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: true. The passwords for the usergroups can not all be the same\/ empty",
+            "description": "Password for the Admin user-group.\r\nPlayers using this password get:\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: true.\r\nThe passwords for the usergroups can not all be the same\/empty\/only numerical",
             "env_variable": "SRV_PW",
             "default_value": "ChangeMe1",
             "user_viewable": true,
@@ -62,7 +62,7 @@
         },
         {
             "name": "[USER GROUP] ''Friend'' Group Password",
-            "description": "Password for the Friend user-group. Players using this password get:\r\nThe passwords for the usergroups can not all be the same or empty\r\n\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: false. The passwords for the usergroups can not all be the same\/ empty",
+            "description": "Password for the Friend user-group.\r\nPlayers using this password get:\r\n- canAccessInventories: true\r\n- canEditBase: true\r\n- canExtendBase: true\r\n- canKickBan: false.\r\nThe passwords for the usergroups can not all be the same\/empty\/only numerical",
             "env_variable": "SRV_PW2",
             "default_value": "ChangeMe2",
             "user_viewable": true,
@@ -72,7 +72,7 @@
         },
         {
             "name": "[USER GROUP] ''Guest'' Group Password",
-            "description": "Password for the Guest user-group. Players using this password get:\r\nThe passwords for the usergroups can not all be the same or empty\r\n\r\n- canAccessInventories: false\r\n- canEditBase: false\r\n- canExtendBase: false\r\n- canKickBan: false. The passwords for the usergroups can not all be the same\/ empty",
+            "description": "Password for the Guest user-group.\r\nPlayers using this password get:\r\n- canAccessInventories: false\r\n- canEditBase: false\r\n- canExtendBase: false\r\n- canKickBan: false.\r\nThe passwords for the usergroups can not all be the same\/empty\/only numerical",
             "env_variable": "SRV_PW3",
             "default_value": "ChangeMe3",
             "user_viewable": true,
