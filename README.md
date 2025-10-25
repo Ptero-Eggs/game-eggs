@@ -85,6 +85,8 @@ Below is a categorized list of games with links to their respective server confi
 * [AssaultCube](./cubeengine/assaultcube)
 * [Cube 2](./cubeengine/cube2)
 
+#### [Cubic Odyssey](./cubic_odyssey)
+
 #### [DayZ](./dayz)
 
 #### [DDNet](./ddnet)
