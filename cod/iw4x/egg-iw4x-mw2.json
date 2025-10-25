@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-10-25T15:59:36+02:00",
+    "exported_at": "2025-10-25T18:35:30+02:00",
     "name": "IW4x",
     "author": "brainshead@gmail.com",
     "description": "IW4x is a community-driven modification for Call of Duty Modern Warfare 2 (2009) that enhances the game with improved security, dedicated servers, and extensive modding capabilities.",
@@ -16,7 +16,7 @@
     "file_denylist": [],
     "startup": ".\/iw4x-launcher --update && wine iw4x.exe -dedicated -stdout +set fs_game $MOD_DIR +set sv_lanonly 0 +set net_port $SERVER_PORT +exec server.cfg +set party_enable \"0\" +map_rotate",
     "config": {
-        "files": "{\r\n    \"userraw\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_hostname\": \"sv_hostname {{server.build.env.SERVER_NAME}}\",\r\n            \"set g_password\": \"set g_password {{server.build.env.SERVER_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
+        "files": "{\r\n    \"userraw\/server.cfg\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"sv_hostname\": \"sv_hostname \\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"set g_password\": \"set g_password \\\"{{server.build.env.SERVER_PASSWORD}}\\\"\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Sending heartbeat to master\"\r\n}",
         "logs": "{}",
         "stop": "^C"
@@ -121,22 +121,22 @@
         },
         {
             "name": "Server Name",
-            "description": "Sets the server hostname. Name needs to be in \" \" like as example \"Pterodactyl IW4X\"\r\n SERVER  COLORS \r\n^1 = Red, ^2 = Green, ^3 = Yellow, ^4 = Blue, ^5 = Cyan, ^6 = Pink, ^7 = White, ^8 = Depends on the team colors playing.,  ^9 = Grey, ^0 = Black, ^: = Rainbow colors.",
+            "description": "Sets the server hostname. \r\n SERVER  COLORS \r\n^1 = Red, ^2 = Green, ^3 = Yellow, ^4 = Blue, ^5 = Cyan, ^6 = Pink, ^7 = White, ^8 = Depends on the team colors playing.,  ^9 = Grey, ^0 = Black, ^: = Rainbow colors.",
             "env_variable": "SERVER_NAME",
             "default_value": "\"Pterodactyl IW4X\"",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|string|regex:\/^\".*\"$\/|max:100",
+            "rules": "required|string|max:100",
             "field_type": "text"
         },
         {
             "name": "Server Password",
-            "description": "Password Protected Server. Leave blank if you want players to join or set password if you want to keep public out. Value needs to be Quotation marks like for example \"CHANGEME\"",
+            "description": "Password Protected Server. Leave blank if you want players to join or set password if you want to keep public out.",
             "env_variable": "SERVER_PASSWORD",
             "default_value": "\"\"",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|regex:\/^\".*\"$\/|max:20",
+            "rules": "nullable|string|max:100",
             "field_type": "text"
         }
     ]
