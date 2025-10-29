@@ -1,9 +1,10 @@
 {
-    "_comment": "Pterodactyl OpenRCT2 Egg ~ Red-Thirten and parkervcp ~ 2022-06-28",
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
     "meta": {
         "version": "PTDL_v2",
         "update_url": null
     },
+    "exported_at": "2025-10-29T14:32:30+01:00",
     "name": "OpenRCT2",
     "author": "red_thirten@yahoo.com",
     "description": "OpenRCT2 is an open-source re-implementation of RollerCoaster Tycoon 2 (RCT2), expanding the game with new features, fixing bugs and raising game limits.",
