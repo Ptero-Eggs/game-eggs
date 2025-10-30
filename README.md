@@ -221,6 +221,8 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [No One Survived](./no_one_survived)
 
+#### [Nuclear Option](./nuclear_option)
+
 #### [Onset](./onset)
 
 #### [OpenArena](./openarena)
