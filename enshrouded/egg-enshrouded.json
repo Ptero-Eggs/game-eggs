@@ -57,7 +57,7 @@
             "default_value": "ChangeMe1",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
+            "rules": "nullable|string|not_regex:/^\\d+$/",
             "field_type": "text"
         },
         {
@@ -67,7 +67,7 @@
             "default_value": "ChangeMe2",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
+            "rules": "nullable|string|not_regex:/^\\d+$/",
             "field_type": "text"
         },
         {
@@ -77,7 +77,7 @@
             "default_value": "ChangeMe3",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string",
+            "rules": "nullable|string|not_regex:/^\\d+$/",
             "field_type": "text"
         },
         {
