@@ -3,7 +3,7 @@
 Grab your friends and set out for adventure in a world of swords, magic, and stuff. Discover tons of cool loot, uncover hidden secrets, and meet new friends and foes along the way. Make your mark and find a place to call home in this cute, multiplayer, open world RPG. 
 
 ## Console
-Swords 'n Magic and Stuff uses a wrapper to stream the server's log file to the console in real-timem input is not supported.
+Swords 'n Magic and Stuff uses a wrapper to stream the server's log file to the console in real-time, input is not supported.
 
 ## Important Information
 The `Server name` variable is very strict, If this isn't set correctly, the server will fail to start.
