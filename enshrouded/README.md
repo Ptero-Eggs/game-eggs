@@ -46,6 +46,7 @@ Go to your **Pterodactyl Panel → Server Settings**, where you can edit:
   - **Admin Group (`SRV_PW`)** – Grants admin privileges.
   - **Friend Group (`SRV_PW2`)** – Grants reduced admin privileges.
   - **Guest Group (`SRV_PW3`)** – General access for users.
+  - **Visitor Group (`SRV_PW4`)** – Minimal access for visitors.
 - **Max Players (`MAX_PLAYERS`)** – Number of player slots (1-16).
 
 Other settings, such as **game settings, IP binding, and log locations**, are still managed in `enshrouded_server.json`
@@ -93,7 +94,10 @@ On first startup, the server will generate the following structure:
         "tamingStartleRepercussion": "LoseSomeProgress",
         "threatBonus": 1,
         "tombstoneMode": "AddBackpackMaterials",
-        "weatherFrequency": "Normal"
+        "weatherFrequency": "Normal",
+        "playerDivingTimeFactor": 1,
+        "fishingDifficulty": "Normal",
+        "curseModifier": "Normal"
     },
     "gameSettingsPreset": "Default",
     "ip": "0.0.0.0",
@@ -102,12 +106,14 @@ On first startup, the server will generate the following structure:
     "queryPort": 15637,
     "saveDirectory": "./savegame",
     "slotCount": 16,
+    "tags": [],
     "userGroups": [
         {
             "canAccessInventories": true,
             "canEditBase": true,
             "canExtendBase": true,
             "canKickBan": true,
+            "canEditWorld": true,
             "name": "Admin",
             "password": "ChangeMe1",
             "reservedSlots": 0
@@ -117,6 +123,7 @@ On first startup, the server will generate the following structure:
             "canEditBase": true,
             "canExtendBase": true,
             "canKickBan": false,
+            "canEditWorld": true,
             "name": "Friend",
             "password": "ChangeMe2",
             "reservedSlots": 1
@@ -126,11 +133,23 @@ On first startup, the server will generate the following structure:
             "canEditBase": false,
             "canExtendBase": false,
             "canKickBan": false,
+            "canEditWorld": false,
             "name": "Guest",
             "password": "ChangeMe3",
             "reservedSlots": 3
+        },
+        {
+            "canAccessInventories": false,
+            "canEditBase": false,
+            "canExtendBase": false,
+            "canKickBan": false,
+            "canEditWorld": false,
+            "name": "Visitor",
+            "password": "ChangeMe4",
+            "reservedSlots": 0
         }
     ],
+    "bannedAccounts": [],
     "voiceChatMode": "Proximity"
 }
 ```
