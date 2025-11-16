@@ -32,7 +32,7 @@
     "variables": [
         {
             "name": "Server Name",
-            "description": "This name will\r\nappear in the\r\nserver list in the\r\ngame",
+            "description": "This name will appear in the server list in the game",
             "env_variable": "SERVER_NAME",
             "default_value": "A Pterodactyl Hosted Server",
             "user_viewable": true,
@@ -42,7 +42,7 @@
         },
         {
             "name": "Server Password",
-            "description": "If presents,\r\nprotects server\r\nwith password",
+            "description": "If present, protects server with password",
             "env_variable": "SERVER_PASSWORD",
             "default_value": "",
             "user_viewable": true,
@@ -62,7 +62,7 @@
         },
         {
             "name": "World ID",
-            "description": "Selected World ID,\r\n(will be created for\r\nany new number)",
+            "description": "Selected World ID, (will be created for any new number)",
             "env_variable": "WORLD_ID",
             "default_value": "1",
             "user_viewable": true,
@@ -102,7 +102,7 @@
         },
         {
             "name": "World Seed",
-            "description": "Seed for world\r\ngenerator",
+            "description": "Seed for world generator",
             "env_variable": "SEED",
             "default_value": "12345",
             "user_viewable": true,
