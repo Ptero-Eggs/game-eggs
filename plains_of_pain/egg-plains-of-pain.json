@@ -15,7 +15,7 @@
         "ghcr.io\/ptero-eggs\/steamcmd:ubuntu": "ghcr.io\/ptero-eggs\/steamcmd:ubuntu"
     },
     "file_denylist": [],
-    "startup": ".\/PlainsOfPain.x86_64 -nographics -batchmode -ignorecompilererrors -config \"configs\/server.json\" -port {{SERVER_PORT}} -queryPort {{QUERY_PORT}}",
+    "startup": ".\/PlainsOfPain.x86_64 -nographics -batchmode -ignorecompilererrors -cc -config \"configs\/server.json\" -port {{SERVER_PORT}} -queryPort {{QUERY_PORT}}",
     "config": {
         "files": "{\r\n    \"configs\/server.json\": {\r\n        \"parser\": \"json\",\r\n        \"find\": {\r\n            \"serverName\": \"{{server.build.env.SERVER_NAME}}\",\r\n            \"worldId\": \"{{server.build.env.WORLD_ID}}\",\r\n            \"mapId\": \"{{server.build.env.MAP_ID}}\",\r\n            \"seed\": \"{{server.build.env.SEED}}\",\r\n            \"difficulty\": \"{{server.build.env.DIFFICULTY}}\",\r\n            \"worldSize\": \"{{server.build.env.WORLD_SIZE}}\",\r\n            \"port\": \"{{server.build.default.port}}\",\r\n            \"queryPort\": \"{{server.build.env.QUERY_PORT}}\",\r\n            \"maxPlayers\": \"{{server.build.env.MAX_PLAYERS}}\",\r\n            \"password\": \"{{server.build.env.SERVER_PASSWORD}}\"\r\n        }\r\n    }\r\n}",
         "startup": "{\r\n    \"done\": \"Set Game State: RUNNING\"\r\n}",
@@ -48,16 +48,6 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "nullable|string|max:20",
-            "field_type": "text"
-        },
-        {
-            "name": "Query Port",
-            "description": "",
-            "env_variable": "QUERY_PORT",
-            "default_value": "27016",
-            "user_viewable": true,
-            "user_editable": false,
-            "rules": "required|integer|between:1024,65535",
             "field_type": "text"
         },
         {
@@ -120,7 +110,17 @@
             "rules": "required|integer",
             "field_type": "text"
         },
-                {
+        {
+            "name": "Query Port",
+            "description": "",
+            "env_variable": "QUERY_PORT",
+            "default_value": "27016",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "required|integer|between:1024,65535",
+            "field_type": "text"
+        },
+        {
             "name": "Steam App ID",
             "description": "",
             "env_variable": "SRCDS_APPID",
@@ -139,6 +139,6 @@
             "user_editable": true,
             "rules": "required|boolean|in:0,1",
             "field_type": "text"
-        },
+        }
     ]
 }
