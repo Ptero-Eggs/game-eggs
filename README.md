@@ -250,6 +250,8 @@ Below is a categorized list of games with links to their respective server confi
 
 #### [SCUM](./scum)
 
+#### [Plains of Pain](./plains_of_pain)
+
 #### [Puck](./puck)
 
 #### [Sonic Robo Blast 2 (SRB2)](./sonic_robo_blast_2)
